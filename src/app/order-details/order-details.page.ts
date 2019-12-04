@@ -22,6 +22,7 @@ export class OrderDetailsPage implements OnInit {
   getOrderDetails() {
     this.orderService.getOrderDetails(this.orderId).subscribe(res => {
       this.order = res;
+      console.log(this.order)
     })
   }
 

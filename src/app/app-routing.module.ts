@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
   { 
-    path: 'profile/:id', 
+    path: 'profile/:id/:isUser/:isOwner', 
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
   { path: 'new-order/:categoryId', loadChildren: './new-order/new-order.module#NewOrderPageModule' },

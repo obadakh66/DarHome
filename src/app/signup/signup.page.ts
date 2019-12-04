@@ -5,6 +5,7 @@ import { ToastController, NavController } from '@ionic/angular';
 import { SystemServicesService } from '../services/system-services.service';
 import { TranslationService } from '../services/tranlation.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../home/categories';
 
 @Component({
   selector: 'app-signup',
@@ -29,6 +30,7 @@ export class SignupPage implements OnInit {
   isChild: boolean;
   private loggedIn: boolean;
   signupObject: any[] = [];
+  allCategories: Category = new Category();
   userForm = new FormGroup({
     Name: new FormControl('', Validators.required),
     UserPass: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -141,43 +143,34 @@ export class SignupPage implements OnInit {
   uploadIdentity(str: any) {
     this.identityProcessing = true
     this.idImg = str.target.files[0];
-    setTimeout(function(){ 
-      this.identityProcessing=!this.identityProcessing;console.log(this.identityProcessing) 
+    setTimeout(function () {
+      this.identityProcessing = !this.identityProcessing; console.log(this.identityProcessing)
     }, 2000);
   }
   uploadCertificate(str: any) {
     this.certificateProcessing = true
     this.certificateImage = str.target.files[0];
-    setTimeout(function(){ this.certificateProcessing=!this.certificateProcessing; }, 2000);
+    setTimeout(function () { this.certificateProcessing = !this.certificateProcessing; }, 2000);
   }
   CreateNewUser(isUser) {
+    if(this.certificateImage && this.idImg){
     this.isLoading = true;
     var user;
+    console.log(this.CategoryType.value)
+    console.log(this.Sex.value)
     if (!isUser) {
       user = {
         firstName: this.FirstName.value,
         lastName: this.LastName.value,
         phoneNumber: this.TechnicianPhoneNumber.value.toString(),
         password: this.TechnicianPassword.value,
-        categoryType: 1,//this.CategoryType.value,
+        categoryType: Number(this.CategoryType.value),
         experianceYears: this.ExperienceYears.value,
-        //identityImage: this.ExperienceYears.value,
-        //certificate: this.ExperienceYears.value,
-        sex: true//this.Sex.value
+        sex: this.Sex.value
       }
       this.userService.createTechnician(user).subscribe(response => {
-
-        this.systemService.showMessage("تم التسجيل", "تم التسجيل بنجاح", 'success')
-        this.isLoading = false;
         this.technicianForm.reset();
-        this.uploadPictures(response.id, this.idImg, this.certificateImage);
-
-      }, error => {
-        var errormsg = error.error;
-        console.log(error);
-
-        this.isLoading = false;
-        this.systemService.showMessage("حصل خطأ", errormsg, 'danger')
+        this.uploadPictures(response.id, this.idImg, this.certificateImage)
       });
 
 
@@ -198,19 +191,27 @@ export class SignupPage implements OnInit {
 
       }, error => {
         var errormsg = error.error;
-        console.log(error);
-
         this.isLoading = false;
         this.systemService.showMessage("حصل خطأ", errormsg, 'danger')
       });
     }
-
+  }
+  else{
+    this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
+  }
 
   }
   uploadPictures(id, file1, file2) {
     this.userService.saveTechnicianCredntials(id, file1, file2).subscribe(res => {
-      console.log(res)
-    })
+      this.systemService.showMessage("تم التسجيل", "تم التسجيل بنجاح", 'success')
+      this.isLoading = false;
+      this.technicianForm.reset();
+      this.route.navigate(["/login"]);
+    }, error => {
+      var errormsg = error.error;
+      this.isLoading = false;
+      this.systemService.showMessage("حصل خطأ", errormsg, 'danger')
+    });
   }
 
   filterItemsOfType(devalue) {

@@ -209,8 +209,8 @@
               <mat-icon>merge_type</mat-icon> <b> نوع الخدمة</b>
             </mat-label>
             <mat-select placeholder="اختر نوع الخدمة" [formControl]="CategoryType">
-              <mat-option>
-                1
+              <mat-option *ngFor="let category of allCategories.categories" [value]="category.id">
+                {{category.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -224,9 +224,12 @@
             <mat-label>
               <mat-icon>people</mat-icon> <b> الجنس</b>
             </mat-label>
-            <mat-select placeholder="اختر الجنس" [formControl]="CategoryType">
-              <mat-option>
-                1
+            <mat-select placeholder="اختر الجنس" [formControl]="Sex">
+              <mat-option [value]="true">
+                ذكر
+              </mat-option>
+              <mat-option [value]="false">
+                انثى
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -304,7 +307,7 @@
       <br />
       <div class="row">
         <div class="col-md-12 text-center">
-          <button mat-raised-button color="primary" (click)="CreateNewUser(false)">
+          <button mat-raised-button color="primary" [disabled]="technicianForm.invalid" (click)="CreateNewUser(false)">
             تسجيل
           </button>
         </div>

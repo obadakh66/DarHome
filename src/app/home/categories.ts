@@ -3,53 +3,53 @@ export class Category{
         {
             id:1,
             name:'كهرباء',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/electrical-electrical-wires-electrician-2898199.jpg'
         },
         {
             id:2,
             name:'تمديدات صحية ',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/tamdedat-sehyeh.jpg'
         },
         {
             id:3,
             name:'دهان',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/apply-blue-brush-221027.jpg'
         },
         {
             id:4,
             name:'اعمال نجارة',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/carpenter.jpg'
         },
         {
             id:5,
             name:'حدادة',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/steal.jpg'
         },
         {
             id:6,
             name:'تنظيف منازل',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/house-clean.jpg'
         },
        
         {
             id:7,
             name:'المنيوم',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/door-doorway-elevator-407423.jpg'
         },
         {
             id:8,
             name:'زجاج ',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/architectural-design-architecture-blur-building-287263.jpg'
         },
         {
             id:9,
             name:'اثاث ومفروشات',
-            imageUrl:''
+            imageUrl:'../../assets/imgs/furintuire.jpg'
         },
         {
             id:10,
-            name:'اثاث ومفروشات',
-            imageUrl:''
+            name:'اعمال الزراعة',
+            imageUrl:'../../assets/imgs/photo-of-people-on-a-cropland-2382904.jpg'
         }
     ]
 }

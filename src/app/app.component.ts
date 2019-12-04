@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -10,7 +10,9 @@ import { AuthServiceService } from './services/auth-service.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  currentUserId;
+  isUser;
   public appPages = [
     {
       title: 'الصفحة الرئيسية',
@@ -52,12 +54,21 @@ export class AppComponent {
   ) {
     this.initializeApp();
   }
+ngOnInit(){
 
+}
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.authService.isLoggedin();
+      if(this.authService.isLoggedin()){
+        let user= JSON.parse(localStorage.getItem("currentUser"));
+
+        this.currentUserId =user.id;
+        user.firstName ? this.isUser= false :this.isUser= true;
+        console.log(user);
+      }
     });
   }
 }

@@ -27,7 +27,12 @@ export class UserService {
 
   }
   getUserDetialsById(id) {
+    console.log("user")
     return this.httpClient.get(baseUrl + getUserRoute + id);
+  }
+  getTechnicianDetialsById(id) {
+    console.log("tech")
+    return this.httpClient.get(baseUrl + 'GetTechnicianById/' + id);
   }
 
   getParentChildrenById(id) {
@@ -36,7 +41,7 @@ export class UserService {
   getChildByParentId(id) {
     return this.httpClient.get(baseUrl +'GetChildByParentId/'+ id);
   }
-  getChildById(id) {
+  getUserById(id) {
     return this.httpClient.get(baseUrl +'GetChildById/'+ id);
   }
   changeChildBalance(childId,newBalance) {
@@ -60,11 +65,12 @@ export class UserService {
   saveTechnicianCredntials(id,file1, file2)
   {
     const formData: FormData = new FormData();
-    const formData2: FormData = new FormData();
-    formData.append('File', file1);
-    formData2.append('File2', file2);
+    //const formData2: FormData = new FormData();
+    formData.append('TechnicianId', id);
+    formData.append('IdFile', file1);
+    formData.append('CertificateFile', file2);
     console.log(formData);
-    return this.httpClient.post(baseUrl + 'SignUpFilesForTechnician/'  ,{ id,formData,formData2});
+    return this.httpClient.post(baseUrl + 'SignUpFilesForTechnician/'  ,formData);
   }
 
   // dreams functions --------------------------------------------------------------------------

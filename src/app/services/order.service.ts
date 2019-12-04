@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
 //const baseUrl = 'https://www.letsridein.com/api/Assignment/'
-const baseUrl = 'http://localhost:5000/api/'
+const baseUrl = 'https://localhost:5001/api/'
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -15,19 +15,24 @@ const httpOptions = {
 export class OrderService {
     constructor(private httpClient: HttpClient) {
 
-    }
+    } 
     getSubCategories(mainCategoryId) {
-        return this.httpClient.get(baseUrl+'GetSubCategories/'+mainCategoryId);
+        return this.httpClient.get(baseUrl + 'Orders/GetSubCategoryByCategoryId/' + mainCategoryId);
     }
 
     createOrder(order) {
-        return this.httpClient.post<any[]>(baseUrl +'Order/PostOrder/' ,order);
+        return this.httpClient.post<any>(baseUrl + 'Order/PostOrder/', order);
+    }
+    uploadOrderImage(id, file) {
+        const formData: FormData = new FormData();
+        formData.append('File', file);
+        return this.httpClient.post<any[]>(baseUrl + 'Order/AddOrderImage/' + id, formData);
     }
     getTechniciansByCategoryType(id) {
-        return this.httpClient.get<any[]>(baseUrl +'User/GetTechniciansByCategoryType/' + id);
+        return this.httpClient.get<any[]>(baseUrl + 'Users/GetTechniciansByCategoryType/' + id);
     }
     getOrderDetails(id) {
-        return this.httpClient.get<any>(baseUrl +'Order/GetOrder/' + id);
+        return this.httpClient.get<any>(baseUrl + 'Order/GetOrder/' + id);
     }
-   
+
 }

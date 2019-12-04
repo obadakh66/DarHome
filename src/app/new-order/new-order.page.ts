@@ -18,12 +18,15 @@ export class NewOrderPage implements OnInit {
 
   ngOnInit() {
     this.fetchCategoryId();
-    //this.getTechniciansByCategoryType();
+    this.getTechniciansByCategoryType();
   }
   mainCategoryId: number;
   subCategories;
   userId: number;
   technicians;
+  orderImage;
+  isFirstStep:boolean=true;
+  isSecondStep:boolean=false;
   public isLoading = true;
   imageProcessing: boolean = false;
   orderForm = new FormGroup({
@@ -56,24 +59,24 @@ export class NewOrderPage implements OnInit {
     this.route.params.subscribe(param => {
       this.mainCategoryId = param.categoryId
       console.log(this.mainCategoryId)
-      //this.getsubCategories(this.mainCategoryId);
+      this.getsubCategories(this.mainCategoryId);
     })
   }
   getsubCategories(mainCategoryId) {
     this.orderService.getSubCategories(mainCategoryId).subscribe(res => {
       this.subCategories = res;
+      console.log(this.subCategories)
     })
   }
 
   uploadImage(str: any) {
     this.imageProcessing = true
-    let image = str.target.files[0];
-    console.log(image)
-    //this.saveUserPhoto(str.target.files[0]);
+    this.orderImage = str.target.files[0];
   }
   getTechniciansByCategoryType() {
     this.orderService.getTechniciansByCategoryType(this.mainCategoryId).subscribe(res => {
       this.technicians = res;
+      console.log(this.technicians)
     })
   }
   createOrder() {
@@ -88,7 +91,13 @@ export class NewOrderPage implements OnInit {
     }
 
     this.orderService.createOrder(newOrder).subscribe(res => {
+      this.uploadOrderImage(res.id);
+    })
+  }
+  uploadOrderImage(id) {
+    this.orderService.uploadOrderImage(id, this.orderImage).subscribe(res => {
       this.systemService.showMessage('تم الإرسال', 'تم إرسال طلبك بنجاح', 'success')
+
     }, error => {
       this.systemService.showMessage('حصل خطأ', 'لم يتم إرسال طلبك بنجاح', 'danger')
     })

@@ -21,33 +21,44 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="user-meta has-text-centered">
-                <h3 class="username">علا محمد</h3>
-                <h5 class="position">أعمال النجارة</h5>
-                <h5 class="position">انثى</h5>
+              <div  *ngIf="!isUser && isOwner" class="user-meta has-text-centered">
+                <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
               </div>
-             
-              <div class="action has-text-centered">
+              <div  *ngIf="!isUser && !isOwner" class="user-meta has-text-centered">
+                <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
+                <h5 *ngIf="currentUser?.sex" class="position">ذكر</h5>
+                <h5 *ngIf="!currentUser?.sex" class="position">انثى</h5>
+                <h5 class="position">{{getCategoryName(currentUser?.categoryType)}}</h5>
+                <h5 class="position">سنوات الخبرة{{currentUser?.experianceYears}}</h5>
+                <h5 class="position"><mat-icon class="mr-2">star</mat-icon>  4.5</h5>
+              </div>
+              <div  *ngIf="isUser && isOwner" class="user-meta has-text-centered">
+                <h3 class="username">{{currentUser?.name}}</h3>
+              </div>
+              <div  *ngIf="isUser && !isOwner" class="user-meta has-text-centered">
+                <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
+                <h5 class="position"><mat-icon class="mr-2">star</mat-icon>  4.5</h5>
+              </div>
+              <div *ngIf="!isOwner" class="action has-text-centered">
                 <ion-row>
                   <ion-col>
-                    <a href="#" class="button is-small">اتصال</a>
+                    <a href="tel:{{currentUser?.phoneNumber}}" class="button is-small">اتصال</a>
                   </ion-col>
                   <ion-col>
                     <a (click)="openDialog()" class="button is-small">تقييم</a>
                   </ion-col>
-
                 </ion-row>
               </div>
               
             </div>
           </div>
-          <div class="card" style="color: gray;">
+          <div *ngIf="isOwner" class="card" style="color: gray;">
               
-              <div>
                   <ion-row class="p-3">
                    <h3 class="text-center">طلباتي</h3>
                   </ion-row>
-                  <ion-row class="order-card" (click)="router.navigate(['/order-details/1'])">
+                  <div *ngFor="let order of currentUser?.order">
+                  <ion-row class="order-card">
                       <ion-col>
                         <img class="order-img" src="../../assets/imgs/furintuire.jpg" />
                       </ion-col>
@@ -57,20 +68,22 @@
                         <ion-row class="m-2"><mat-icon>help_outline</mat-icon>  بإنتظار القبول</ion-row>
                       </ion-col>
                   </ion-row>
-                  <ion-row class="order-card" (click)="router.navigate(['/order-details/1'])">
+                  <hr/>
+                  <ion-row>
+                      <ion-col>                      
+                        </ion-col>
                     <ion-col>
-                      <img class="order-img" src="../../assets/imgs/furintuire.jpg" />
+                      <button (click)="router.navigate(['/order-details/'+order.id])" style="width: 100px" mat-raised-button color="primary">
+                        <mat-icon>remove_red_eye</mat-icon> مشاهدة التفاصيل
+                    </button>
                     </ion-col>
-                    <ion-col>
-                      <ion-row class="m-2" style="color: cornflowerblue;"> <mat-icon>person</mat-icon>محمد سلطان</ion-row>
-                      <ion-row class="m-2"><mat-icon>apps</mat-icon>  أعمال النجارة</ion-row>
-                      <ion-row class="m-2"><mat-icon>help_outline</mat-icon>  بإنتظار القبول</ion-row>
+                    <ion-col>                      
                     </ion-col>
-                   
-                </ion-row>
+                  </ion-row>
+                </div>
+
                 </div>
                 
-            </div>
         </div>
 
       </div>
