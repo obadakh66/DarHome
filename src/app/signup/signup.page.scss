@@ -1,0 +1,60 @@
+.file-upload {
+	position: relative;
+    display: inline-block;
+    width: 92%;
+    text-align: right;
+    margin-right: 13px;
+}
+
+.file-upload__label {
+    display: block;
+    padding: 5px 5px;
+    color: #fff;
+    background: white;
+    color: gray;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+    float: right;
+    border-bottom: solid gray 0.05em;
+    width: 92%;
+    margin-right: 13px;
+  &:hover {
+     cursor: pointer;
+     background: #000;
+     border-bottom: solid white 0.6px;
+  }
+}
+    
+.file-upload__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1;
+    width:0;
+    height: 100%;
+    opacity: 0;
+}
+
+/*****************************************
+ design styles
+******************************************/
+
+ .signup-box
+    {
+       width: 100%;
+    
+    }
+    h2 {
+      width: 100%; 
+      text-align: center; 
+      border-bottom: 1px solid #000; 
+      line-height: 0.1em;
+      margin: 10px 0 20px; 
+   } 
+   
+   h2 span { 
+       background:#fff; 
+       padding:0 10px; 
+   }

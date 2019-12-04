@@ -1,0 +1,7 @@
+{
+  "name": "DarHome",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

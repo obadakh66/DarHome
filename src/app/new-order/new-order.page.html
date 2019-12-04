@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      طلب جديد
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <br />
+  <br />
+  
+  <ion-card class="p-3">
+    <ion-row>
+      <ion-label class="text-center">يرجى تعبئة جميع الحقول لإرسال طلبك</ion-label>
+    </ion-row>
+    <form [formGroup]="orderForm">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>person_pin</mat-icon> <b> نوع الوحدة</b> <i></i>
+            </mat-label>
+            <mat-select placeholder="اختر نوع الوحدة" [formControl]="unitType">
+                <mat-option>
+                  1
+                </mat-option>
+              </mat-select>
+            <mat-error *ngIf="unitType.touched && unitType.invalid">
+              نوع الوحدة مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <mat-form-field class="col-md-12">
+              <mat-label>
+                <mat-icon>person_pin</mat-icon> <b> نوع الخدمة الفرعي</b> <i></i>
+              </mat-label>
+              <mat-select placeholder="اختر نوع الوحدة" [formControl]="subCategoryId">
+                  <mat-option>
+                    1
+                  </mat-option>
+                </mat-select>
+              <mat-error *ngIf="subCategoryId.touched && subCategoryId.invalid">
+                نوع الخدمة الفرعي مطلوب
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><br />
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>person_pin</mat-icon> <b> التفاصيل</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="تفاصيل الطلب" formControlName="details" type="text">
+            <mat-error *ngIf="details.touched && details.invalid">
+              التفاصيل مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <mat-form-field class="col-md-12">
+              <mat-label>
+                <mat-icon>person_pin</mat-icon> <b> العنوان</b> <i></i>
+              </mat-label>
+              <input matInput placeholder="ادخل عنوانك بالكامل" formControlName="location" type="text">
+              <mat-error *ngIf="location.touched && location.invalid">
+                العنوان مطلوب
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><br />
+     
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="file-upload">
+              <label for="upload" class="file-upload__label">
+                <mat-icon>add_photo_alternate</mat-icon> <b> صورة العطل</b>
+              </label>
+              <input id="upload" class="file-upload__input" type="file" (change)="uploadIdentity($event)"
+                name="file-upload">
+              <ion-progress-bar style="margin-right: 13px;width: 92%;" *ngIf="imageProcessing" type="indeterminate">
+              </ion-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div><br />
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <mat-form-field class="col-md-12">
+              <mat-label>
+                <mat-icon>person_pin</mat-icon> <b>التقني</b> <i></i>
+              </mat-label>
+              <mat-select placeholder="اختر التقني " [formControl]="technicianId">
+                  <mat-option>
+                    1
+                  </mat-option>
+                </mat-select>
+              <mat-error *ngIf="subCategoryId.touched && subCategoryId.invalid">
+                التقني مطلوب
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div><br />
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button mat-raised-button color="primary" (click)="isParentExist()">
+            تسجيل
+          </button>
+        </div>
+
+      </div>
+
+      <br />
+    </form>
+  </ion-card>
+</ion-content>

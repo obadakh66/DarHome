@@ -1,0 +1,67 @@
+.welcome-card img {
+  height: 25vh;
+  overflow: hidden;
+  object-fit: cover;
+
+}
+.main-row1{
+  animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row2{
+  animation: slide-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row3{
+  animation: slide-top 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row4{
+  animation: slide-top 1.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row5{
+  animation: slide-top 1.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row6{
+  animation: slide-top 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row7{
+  animation: slide-top 2.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row8{
+  animation: slide-top 2.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row9{
+  animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.main-row10{
+  animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
+
+}
+.category-title{
+  position: absolute;
+    top: 125px;
+    z-index: 999999;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: 0px -1px 18px 0px rgba(62,68,71,1);
+    width: 90px;
+    text-align: center;}
+
+    @keyframes slide-top {
+      0% {
+                transform: translateY(900px);
+      }
+      100% {
+                transform: translateY(30px);
+      }
+    }

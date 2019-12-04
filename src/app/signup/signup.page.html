@@ -1,0 +1,318 @@
+<ion-header color="primary">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      التسجيل
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br />
+  <br />
+  <br />
+  <div *ngIf="!isChoosen">
+    <br />
+    <br />
+    <br />
+    <ion-row>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <ion-col></ion-col>
+      <ion-col>
+        <ion-row>
+          <div class="col-md-12 text-center">
+            <button style="width: 137px;margin-bottom: 5px;" mat-raised-button color="primary"
+              (click)="isUser=false;isTechnician=true;isChoosen=true;">
+              تسجيل كـ تقني
+            </button>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="col-md-12 text-center">
+            <button style="width: 137px;" mat-raised-button color="primary"
+              (click)="isUser=true;isTechnician=false;isChoosen=true;">
+              تسجيل كـ مستخدم عادي
+            </button>
+          </div>
+        </ion-row>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </div>
+  <ion-card *ngIf="isUser" class="p-3">
+    <form [formGroup]="userForm">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>person_pin</mat-icon> <b> الإسم الكامل</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل اسمك بالكامل *" formControlName="Name" type="text">
+            <mat-error *ngIf="Name.touched && Name.invalid">
+              الإسم الكامل مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>phone</mat-icon> <b> رقم الهاتف</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل رقم الهاتف " formControlName="UserPhoneNumber" type="number">
+            <mat-error *ngIf="UserPhoneNumber.hasError('required')">
+              رقم الهاتف مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> <br />
+
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>lock_open</mat-icon> <b> كلمة المرور</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل كلمة المرور" formControlName="UserPass"
+              [type]="hide? 'UserPass' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+
+            <mat-error *ngIf="UserPass.touched && UserPass.invalid">
+              يجب ان تتكون كلمة المرور من 8 رموز على الأقل
+            </mat-error>
+            <mat-error *ngIf="UserPass.hasError('required')">
+              كلمة المرور مطلوبة
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> <br />
+
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>lock_open</mat-icon> <b> إعادة كلمة المرور</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="إعادة كلمة المرور" formControlName="UserRePass"
+              [type]="hide? 'UserRePass' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+
+            <mat-error *ngIf="UserRePass.hasError('required')">
+              إعادة كلمة المرور مطلوبة
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button mat-raised-button color="primary" (click)="CreateNewUser(true)" [disabled]="userForm.invalid">
+            تسجيل
+          </button>
+        </div>
+
+      </div>
+
+      <br />
+
+
+    </form>
+  </ion-card>
+  <ion-card *ngIf="isTechnician" class="p-3">
+    <form [formGroup]="technicianForm">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>person_pin</mat-icon> <b> الإسم الأول</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل إسمك الأول" formControlName="FirstName" type="text">
+            <mat-error *ngIf="FirstName.touched && FirstName.invalid">
+              الإسم الأول مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>person_pin</mat-icon> <b> الإسم الأخير</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل إسمك الأخير" formControlName="LastName" type="text">
+            <mat-error *ngIf="LastName.touched && LastName.invalid">
+              الإسم الأخير مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>phone</mat-icon> <b> رقم الهاتف</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل رقم الهاتف " formControlName="TechnicianPhoneNumber" type="number">
+            <mat-error *ngIf="TechnicianPhoneNumber.hasError('required')">
+              رقم الهاتف مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>format_list_numbered_rtl</mat-icon> <b> عدد سنوات الخبرة</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل عدد سنوات الخبرة " formControlName="ExperienceYears" type="number">
+            <mat-error *ngIf="ExperienceYears.hasError('required')">
+              عدد سنوات الخبرة مطلوب
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12 w-100">
+            <mat-label>
+              <mat-icon>merge_type</mat-icon> <b> نوع الخدمة</b>
+            </mat-label>
+            <mat-select placeholder="اختر نوع الخدمة" [formControl]="CategoryType">
+              <mat-option>
+                1
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12 w-100">
+            <mat-label>
+              <mat-icon>people</mat-icon> <b> الجنس</b>
+            </mat-label>
+            <mat-select placeholder="اختر الجنس" [formControl]="CategoryType">
+              <mat-option>
+                1
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="file-upload">
+              <label for="upload" class="file-upload__label">
+                <mat-icon>add_photo_alternate</mat-icon> <b> صورة الهوية الشخصية</b>
+              </label>
+              <input id="upload" class="file-upload__input" type="file" (change)="uploadIdentity($event)" name="file-upload">
+              <ion-progress-bar style="margin-right: 13px;width: 92%;" *ngIf="identityProcessing" type="indeterminate"></ion-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="file-upload">
+              <label for="upload2" class="file-upload__label">
+                <mat-icon>add_photo_alternate</mat-icon> <b> صورة شهادة مزاولة المهنة</b>
+              </label>
+              <input id="upload2" class="file-upload__input" type="file" (change)="uploadCertificate($event)" name="file-upload">
+              <ion-progress-bar style="margin-right: 13px;width: 92%;" *ngIf="certificateProcessing" type="indeterminate"></ion-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>lock_open</mat-icon> <b> كلمة المرور</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="ادخل كلمة المرور" formControlName="TechnicianPassword"
+              [type]="hide? 'TechnicianPassword' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+
+            <mat-error *ngIf="TechnicianPassword.touched && TechnicianPassword.invalid">
+              يجب ان تتكون كلمة المرور من 8 رموز على الأقل
+            </mat-error>
+            <mat-error *ngIf="TechnicianPassword.hasError('required')">
+              كلمة المرور مطلوبة
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12">
+            <mat-label>
+              <mat-icon>lock_open</mat-icon> <b> إعادة كلمة المرور</b> <i></i>
+            </mat-label>
+            <input matInput placeholder="إعادة كلمة المرور" formControlName="TechnicianRePassword"
+              [type]="hide? 'TechnicianRePassword' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide? 'visibility_off' : 'visibility'}}</mat-icon>
+
+            <mat-error *ngIf="TechnicianRePassword.hasError('required')">
+              إعادة كلمة المرور مطلوبة
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button mat-raised-button color="primary" (click)="CreateNewUser(false)">
+            تسجيل
+          </button>
+        </div>
+
+      </div>
+
+      <br />
+    </form>
+  </ion-card>
+
+</ion-content>

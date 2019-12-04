@@ -1,0 +1,65 @@
+<ion-header color="primary">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        تسجيل الدخول
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <ion-card class="p-3">
+        <form [formGroup]="loginForm">
+         
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+              <mat-form-field class="col-md-12">
+                <mat-label>
+                  <mat-icon>phone</mat-icon> <b> رقم الهاتف</b> <i></i>
+                </mat-label>
+                <input matInput placeholder="ادخل رقم الهاتف " formControlName="phoneNumber" type="text">
+                <mat-error *ngIf="phoneNumber.hasError('required')">
+                  رقم الهاتف مطلوب
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div> <br />
+    
+          <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+              <mat-form-field class="col-md-12">
+                <mat-label>
+                  <mat-icon>lock_open</mat-icon> <b> كلمة المرور</b> <i></i>
+                </mat-label>
+                <input matInput placeholder="ادخل كلمة المرور" formControlName="password" type="password">
+                <mat-error *ngIf="password.hasError('required')">
+                  كلمة المرور مطلوبة
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div> <br />
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <button mat-raised-button color="primary" (click)="login()">
+                تسجيل الدخول
+              </button>
+            </div>
+    
+          </div>
+    
+          <br />
+    
+    
+        </form>
+      </ion-card>
+</ion-content>
