@@ -1,19 +1,29 @@
 <ion-header color="primary">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      التسجيل
-    </ion-title>
-  </ion-toolbar>
+    <mat-toolbar color="primary">
+     
+        <mat-toolbar-row>
+            <ion-buttons slot="start">
+                <ion-menu-button style="color: cornsilk;"></ion-menu-button>
+              </ion-buttons>
+              <ion-title>
+               التسجيل
+                   
+              </ion-title>   
+            </mat-toolbar-row>
+      
+     
+      </mat-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <div *ngIf="!isChoosen" class="backBody">
+      <br />
   <br />
   <br />
-  <br />
-  <div *ngIf="!isChoosen">
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />
@@ -28,7 +38,7 @@
       <ion-col>
         <ion-row>
           <div class="col-md-12 text-center">
-            <button style="width: 137px;margin-bottom: 5px;" mat-raised-button color="primary"
+            <button style="width: 137px;margin-bottom: 5px;" mat-raised-button color="accent"
               (click)="isUser=false;isTechnician=true;isChoosen=true;">
               تسجيل كـ تقني
             </button>
@@ -36,7 +46,7 @@
         </ion-row>
         <ion-row>
           <div class="col-md-12 text-center">
-            <button style="width: 137px;" mat-raised-button color="primary"
+            <button style="width: 137px;" mat-raised-button color="accent"
               (click)="isUser=true;isTechnician=false;isChoosen=true;">
               تسجيل كـ مستخدم عادي
             </button>
@@ -52,7 +62,7 @@
     <br />
     <br />
   </div>
-  <ion-card *ngIf="isUser" class="p-3">
+  <ion-card *ngIf="isUser" class="p-3 ionic-card">
     <form [formGroup]="userForm">
       <div class="row">
         <div class="col-md-2"></div>
@@ -140,7 +150,7 @@
 
     </form>
   </ion-card>
-  <ion-card *ngIf="isTechnician" class="p-3">
+  <ion-card *ngIf="isTechnician" class="p-3 ionic-card">
     <form [formGroup]="technicianForm">
       <div class="row">
         <div class="col-md-2"></div>

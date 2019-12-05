@@ -1,87 +1,95 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-     الصفحة الرئيسية
-         
-    </ion-title>
-  </ion-toolbar>
+    <mat-toolbar color="primary">
+     
+        <mat-toolbar-row>
+            <ion-buttons slot="start">
+                <ion-menu-button style="color: cornsilk;"></ion-menu-button>
+              </ion-buttons>
+              <ion-title>
+               الصفحة الرئيسية
+                   
+              </ion-title>   
+            </mat-toolbar-row>
+      
+     
+      </mat-toolbar>
+  <!-- <ion-toolbar>
+   
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
     <ion-row>
         <ion-col class="main-row1" (click)="navigateToNewOrder(1)">
-            <ion-card class="welcome-card" >
+            <mat-card class="welcome-card" >
                 <img src="../../assets/imgs/electrical-electrical-wires-electrician-2898199.jpg" alt="" />
                 <div class="category-title">كهرباء</div>
-              </ion-card>
+              </mat-card>
          </ion-col>
          <ion-col class="main-row2" (click)="navigateToNewOrder(2)">
-            <ion-card class="welcome-card" >
+            <mat-card class="welcome-card" >
                 <img src="../../assets/imgs/tamdedat-sehyeh.jpg" alt="" />
                 <div class="category-title">تمديدات صحية</div>
-              </ion-card>
+            </mat-card>
          </ion-col>
     </ion-row>
     
   <ion-row>
       <ion-col class="main-row3" (click)="navigateToNewOrder(3)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/apply-blue-brush-221027.jpg" alt="" />
               <div class="category-title">دهان</div>
-            </ion-card>
+          </mat-card>
        </ion-col>     
   </ion-row>
   <ion-row>
       <ion-col class="main-row4" (click)="navigateToNewOrder(4)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/carpenter.jpg" alt="" />
               <div class="category-title">اعمال نجارة</div>
-            </ion-card>
+            </mat-card>
        </ion-col>
        <ion-col class="main-row5" (click)="navigateToNewOrder(5)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/steal.jpg" alt="" />
               <div class="category-title">حدادة</div>
-            </ion-card>
+            </mat-card>
        </ion-col>
   </ion-row>
   <ion-row>
       <ion-col class="main-row6" (click)="navigateToNewOrder(6)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/house-clean.jpg" alt="" />
               <div class="category-title">تنظيف منازل</div>
-            </ion-card>
+            </mat-card>
        </ion-col>     
   </ion-row>
   <ion-row>
       <ion-col class="main-row7" (click)="navigateToNewOrder(7)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/door-doorway-elevator-407423.jpg" alt="" />
               <div class="category-title">المنيوم</div>
-            </ion-card>
+            </mat-card>
        </ion-col>
        <ion-col class="main-row8" (click)="navigateToNewOrder(8)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/architectural-design-architecture-blur-building-287263.jpg" alt="" />
               <div class="category-title">زجاج </div>
-            </ion-card>
+            </mat-card>
        </ion-col>
   </ion-row>
   <ion-row>
       <ion-col class="main-row9" (click)="navigateToNewOrder(9)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/furintuire.jpg" alt="" />
               <div class="category-title">اثاث ومفروشات</div>
-            </ion-card>
+            </mat-card>
        </ion-col>  
        <ion-col class="main-row10" (click)="navigateToNewOrder(10)">
-          <ion-card class="welcome-card" >
+          <mat-card class="welcome-card" >
               <img src="../../assets/imgs/photo-of-people-on-a-cropland-2382904.jpg" alt="" />
               <div class="category-title">اعمال الزراعة</div>
-            </ion-card>
+            </mat-card>
        </ion-col>     
   </ion-row>
 </ion-content>

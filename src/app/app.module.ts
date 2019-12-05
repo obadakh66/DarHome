@@ -1,3 +1,4 @@
+import { DemoMaterialModule } from './material-module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -38,6 +39,7 @@ export function tokenGetter() {
       } 
     }),
     HttpClientModule,
+    DemoMaterialModule,
     BrowserAnimationsModule
   ],
   providers: [
