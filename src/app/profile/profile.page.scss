@@ -7,7 +7,13 @@
     position: absolute;
     top: 10%;
   }
-  
+  .backBody{
+    height: 100%;
+    background-image: url("../../assets/imgs/close-up-photo-of-pink-petaled-flowers-600114.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+      
+}
   .section {
     .card {
       border-radius: 6px;
@@ -17,7 +23,7 @@
       margin: 0 auto;
       .header {
         height: 120px;
-        background: cornflowerblue;
+        background: #673AB7;
         .avatar {
           width: 80px;
           height: 100%;
