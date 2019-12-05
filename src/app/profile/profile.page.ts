@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { RateDialogPage } from '../rate-dialog/rate-dialog/rate-dialog.page';
 import { UserService } from '../services/user.service';
 import { Category } from '../home/categories';
+import { SystemServicesService } from '../services/system-services.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfilePage implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private userService: UserService,
+    private notificationService:SystemServicesService,
     private router: Router) { }
   currentUserId: number;
   passedUserId: number;
@@ -67,8 +69,9 @@ export class ProfilePage implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-
+      if(result){
+        this.createRate(result);
+      }
     });
   }
   allCategories: Category = new Category();
@@ -94,9 +97,11 @@ export class ProfilePage implements OnInit {
     console.log(newRate)
 
     this.userService.createRate(newRate).subscribe(response=>{
-
+      this.notificationService.showMessage('تم بنجاح', 'تم التقييم بنجاح','success');
+      this.ngOnInit();
+    }, error => {
+      this.notificationService.showMessage('حصل خطأ ', 'لم يتم التقييم بنجاح','danger');
     })
-
   }
 
 }  
