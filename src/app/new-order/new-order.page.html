@@ -1,20 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      طلب جديد
-    </ion-title>
-  </ion-toolbar>
+    <mat-toolbar color="primary">
+     
+        <mat-toolbar-row>
+            <ion-buttons slot="start">
+                <ion-menu-button style="color: cornsilk;"></ion-menu-button>
+              </ion-buttons>
+              <ion-title>
+               طلب جديد
+                   
+              </ion-title>   
+            </mat-toolbar-row>
+      
+     
+      </mat-toolbar>
 </ion-header>
 
 <ion-content>
-
+<div class="backBody">
   <br />
   <br />
 
-  <ion-card class="p-3">
+  <mat-card class="p-3" style="opacity: 0.9; width: 80%; margin-right: 10%;">
     <ion-row>
       <ion-label class="text-center">يرجى تعبئة جميع الحقول لإرسال طلبك</ion-label>
     </ion-row>
@@ -160,5 +166,6 @@
         </div>
       </div>
     </form>
-  </ion-card>
+  </mat-card>
+</div>
 </ion-content>

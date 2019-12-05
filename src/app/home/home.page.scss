@@ -1,8 +1,16 @@
 .welcome-card img {
   height: 25vh;
+  width: 100%;
   overflow: hidden;
   object-fit: cover;
+ 
+}
+.welcome-card{
+  padding: 0px;
+}
 
+ion-content{
+  background-image: url('../../assets/imgs/abstract-art-background-blur-586744.jpg');
 }
 .main-row1{
   animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
@@ -44,11 +52,13 @@
   animation: slide-top 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) alternate both;
 
 }
+
+
 .category-title{
   position: absolute;
-    top: 125px;
+    bottom: 0;
     z-index: 999999;
-    background-color: blue;
+    background-color: black;
     color: white;
     padding: 5px;
     border-top-left-radius: 25px;

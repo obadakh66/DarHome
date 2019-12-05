@@ -33,16 +33,6 @@ export class AppComponent implements OnInit{
       title: 'الملف الشخصي',
       url: '/profile',
       icon: 'contact'
-    },
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
     }
   ];
 

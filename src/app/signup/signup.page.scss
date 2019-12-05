@@ -5,7 +5,17 @@
     text-align: right;
     margin-right: 13px;
 }
-
+.backBody{
+    height: 100%;
+    background-image: url("../../assets/imgs/close-up-photo-of-pink-petaled-flowers-600114.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;    
+}
+.ionic-card {
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(229,230,250,1) 50%, rgba(255,255,255,1) 100%);
+}
 .file-upload__label {
     display: block;
     padding: 5px 5px;
