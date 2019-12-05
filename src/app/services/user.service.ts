@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-const baseUrl = 'https://localhost:5001/api/Users/'
+const baseUrl = 'https://localhost:44390/api/Users/'
 
 const getUserRoute = 'GetUser/';
 
