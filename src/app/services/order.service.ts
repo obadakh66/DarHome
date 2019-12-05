@@ -18,21 +18,27 @@ export class OrderService {
     } 
     getSubCategories(mainCategoryId) {
         return this.httpClient.get(baseUrl + 'Orders/GetSubCategoryByCategoryId/' + mainCategoryId);
-    }
+    } 
 
     createOrder(order) {
-        return this.httpClient.post<any>(baseUrl + 'Order/PostOrder/', order);
+        return this.httpClient.post<any>(baseUrl + 'Orders/PostOrder/', order);
     }
     uploadOrderImage(id, file) {
         const formData: FormData = new FormData();
         formData.append('File', file);
-        return this.httpClient.post<any[]>(baseUrl + 'Order/AddOrderImage/' + id, formData);
+        return this.httpClient.post<any[]>(baseUrl + 'Orders/AddOrderImage/' + id, formData);
     }
     getTechniciansByCategoryType(id) {
         return this.httpClient.get<any[]>(baseUrl + 'Users/GetTechniciansByCategoryType/' + id);
     }
     getOrderDetails(id) {
-        return this.httpClient.get<any>(baseUrl + 'Order/GetOrder/' + id);
+        return this.httpClient.get<any>(baseUrl + 'Orders/GetOrder/' + id);
+    }
+    acceptOrder(id){
+        return this.httpClient.get<any>(baseUrl + 'Orders/AcceptOrder/' + id);
+    }
+    rejectOrder(id){
+        return this.httpClient.get<any>(baseUrl + 'Orders/RejectOrder/' + id);
     }
 
 }

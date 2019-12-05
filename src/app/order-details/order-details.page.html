@@ -10,77 +10,102 @@
 </ion-header>
 <ion-content>
 
-  <br/>
-  <br/>
+  <br />
+  <br />
 
   <ion-card class="p-3">
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <ion-row>
-              <mat-icon>group_work</mat-icon> <b class="mr-2">  نوع الوحدة  </b> 
-          </ion-row>
-        </div>
-      </div><hr/>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <ion-row>
-                <mat-icon>group_work</mat-icon> <b class="mr-2"> نوع الخدمة الفرعي</b> <i></i>
-              </ion-row>
-       
-        </div>
-      </div><hr/>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <ion-row>
-                <mat-icon>subject</mat-icon> <b class="mr-2"> التفاصيل</b> <i></i>
-              </ion-row>
-        </div>
-      </div><hr/>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <ion-row>
-                <mat-icon>my_location</mat-icon> <b class="mr-2"> العنوان</b> <i></i>
-              </ion-row>
-        </div>
-      </div><hr/>
-
-      <div class="row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-8">
-              <ion-row>
-                  <mat-icon>add_photo_alternate</mat-icon> <b class="mr-2"> صورة العطل</b>
-              </ion-row>    
-              <ion-row>
-                <img src="../../assets/imgs/apply-blue-brush-221027.jpg"/>
-              </ion-row>     
-        </div>
-      </div><hr/>
-      <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <ion-row>
-                <mat-icon>person_pin</mat-icon> <b class="mr-2">التقني</b> <i></i>
-              </ion-row>
-        </div>
-      </div><hr/>
-      <ion-row>
-          <ion-col class="m-3">
-            <button style="width: 100px" mat-raised-button color="primary">
-              <mat-icon>check_circle</mat-icon> قبول
-          </button>
-          </ion-col>
-          <ion-col class="m-3">
-            <button style="width: 100px" mat-raised-button color="primary">
-              <mat-icon>highlight_off</mat-icon> رفض
-          </button>
-          </ion-col>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <ion-row>
+          <mat-icon>group_work</mat-icon> <b *ngIf="order?.unitType==1" class="mr-2"> نوع الوحدة : شقة </b>
+          <b *ngIf="order?.unitType==2" class="mr-2"> نوع الوحدة : مبنى </b>
+          <b *ngIf="order?.unitType==3" class="mr-2"> نوع الوحدة : فيلا </b>
+          <b *ngIf="order?.unitType==4" class="mr-2"> نوع الوحدة : اخرى </b>
+        </ion-row>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <ion-row>
+          <mat-icon>group_work</mat-icon> <b class="mr-2"> نوع الخدمة الفرعي : {{order?.subCategoryName}}</b> <i></i>
         </ion-row>
 
-      <hr/>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <ion-row>
+          <mat-icon>subject</mat-icon> <b class="mr-2"> التفاصيل : {{order?.details}}</b> <i></i>
+        </ion-row>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <ion-row>
+          <mat-icon>my_location</mat-icon> <b class="mr-2"> العنوان : {{order?.location}}</b> <i></i>
+        </ion-row>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <ion-row *ngIf="order?.orderStatus==1">
+          <mat-icon>alarm</mat-icon> <b class="mr-2"> حالة الطلب : بإنتظار القبول</b> <i></i>
+        </ion-row>
+        <ion-row *ngIf="order?.orderStatus==2">
+          <mat-icon>alarm</mat-icon> <b class="mr-2"> حالة الطلب : مقبول</b> <i></i>
+        </ion-row>
+        <ion-row *ngIf="order?.orderStatus==3">
+          <mat-icon>alarm</mat-icon> <b class="mr-2"> حالة الطلب : مرفوض</b> <i></i>
+        </ion-row>
+
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+        <ion-row>
+          <mat-icon>add_photo_alternate</mat-icon> <b class="mr-2"> صورة العطل</b>
+        </ion-row>
+        <ion-row>
+          <img [src]="mainImgUrl+order?.image" />
+        </ion-row>
+      </div>
+    </div>
+    <hr />
+    <ion-row *ngIf="order?.orderStatus==1">
+      <ion-col class="m-3">
+        <button (click)="acceptOrder(order.id)" style="width: 100px" mat-raised-button color="primary">
+          <mat-icon>check_circle</mat-icon> قبول
+        </button>
+      </ion-col>
+      <ion-col class="m-3">
+        <button (click)="rejectOrder(order.id)" style="width: 100px" mat-raised-button color="primary">
+          <mat-icon>highlight_off</mat-icon> رفض
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="order?.orderStatus!=1">
+        <ion-col class="m-3">
+          <button disabled *ngIf="order?.orderStatus==2" style="width: 100px" mat-raised-button color="primary">
+           مقبول
+          </button>
+          <button disabled *ngIf="order?.orderStatus==3" style="width: 100px" mat-raised-button color="primary">
+           مرفوض
+            </button>
+        </ion-col>      
+      </ion-row>
+
+    <hr />
   </ion-card>
 </ion-content>

@@ -58,6 +58,15 @@
        background:#fff; 
        padding:0 10px; 
    }
-  label{
-       width: 100% !important;
-   }
+   .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .mat-radio-container{
+      width: 100%;
+  }

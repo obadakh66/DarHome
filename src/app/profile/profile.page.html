@@ -21,69 +21,93 @@
               </div>
             </div>
             <div class="card-body">
-              <div  *ngIf="!isUser && isOwner" class="user-meta has-text-centered">
+              <div *ngIf="isUser!='true' && isOwner=='true'" class="user-meta has-text-centered">
                 <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
               </div>
-              <div  *ngIf="!isUser && !isOwner" class="user-meta has-text-centered">
+              <div *ngIf="isUser!='true' && isOwner!='true'" class="user-meta has-text-centered">
                 <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
                 <h5 *ngIf="currentUser?.sex" class="position">ذكر</h5>
                 <h5 *ngIf="!currentUser?.sex" class="position">انثى</h5>
                 <h5 class="position">{{getCategoryName(currentUser?.categoryType)}}</h5>
-                <h5 class="position">سنوات الخبرة{{currentUser?.experianceYears}}</h5>
-                <h5 class="position"><mat-icon class="mr-2">star</mat-icon>  4.5</h5>
+                <h5 class="position">سنوات الخبرة{{' '+currentUser?.experianceYears+' '}}</h5>
+                <h5 class="position">
+                  <mat-icon class="mr-2">star</mat-icon> {{currentUser?.rate}}
+                </h5>
               </div>
-              <div  *ngIf="isUser && isOwner" class="user-meta has-text-centered">
+              <div *ngIf="isUser=='true' && isOwner=='true'" class="user-meta has-text-centered">
                 <h3 class="username">{{currentUser?.name}}</h3>
               </div>
-              <div  *ngIf="isUser && !isOwner" class="user-meta has-text-centered">
-                <h3 class="username">{{currentUser?.firstName +' '+ currentUser?.lastName}}</h3>
-                <h5 class="position"><mat-icon class="mr-2">star</mat-icon>  4.5</h5>
+              <div *ngIf="isUser=='true' && isOwner!='true'" class="user-meta has-text-centered">
+                <h3 class="username">{{currentUser?.name}}</h3>
+                <h5 class="position">
+                  <mat-icon class="mr-2">star</mat-icon> 4.5
+                </h5>
               </div>
-              <div *ngIf="!isOwner" class="action has-text-centered">
+              <div *ngIf="isOwner!='true'" class="action has-text-centered">
                 <ion-row>
                   <ion-col>
                     <a href="tel:{{currentUser?.phoneNumber}}" class="button is-small">اتصال</a>
                   </ion-col>
-                  <ion-col>
+                  <ion-col *ngIf="isUser!='true'">
                     <a (click)="openDialog()" class="button is-small">تقييم</a>
                   </ion-col>
                 </ion-row>
               </div>
-              
+
             </div>
           </div>
-          <div *ngIf="isOwner" class="card" style="color: gray;">
-              
-                  <ion-row class="p-3">
-                   <h3 class="text-center">طلباتي</h3>
-                  </ion-row>
-                  <div *ngFor="let order of currentUser?.order">
-                  <ion-row class="order-card">
-                      <ion-col>
-                        <img class="order-img" src="../../assets/imgs/furintuire.jpg" />
-                      </ion-col>
-                      <ion-col>
-                        <ion-row class="m-2" style="color: cornflowerblue;"><mat-icon>person</mat-icon>محمد سلطان</ion-row>
-                        <ion-row class="m-2"><mat-icon>apps</mat-icon>  أعمال النجارة</ion-row>
-                        <ion-row class="m-2"><mat-icon>help_outline</mat-icon>  بإنتظار القبول</ion-row>
-                      </ion-col>
-                  </ion-row>
-                  <hr/>
-                  <ion-row>
-                      <ion-col>                      
-                        </ion-col>
-                    <ion-col>
-                      <button (click)="router.navigate(['/order-details/'+order.id])" style="width: 100px" mat-raised-button color="primary">
-                        <mat-icon>remove_red_eye</mat-icon> مشاهدة التفاصيل
-                    </button>
-                    </ion-col>
-                    <ion-col>                      
-                    </ion-col>
-                  </ion-row>
-                </div>
+          <div *ngIf="isOwner=='true'" class="card" style="color: gray;">
 
-                </div>
-                
+            <ion-row class="p-3">
+              <h3 class="text-center">طلباتي</h3>
+            </ion-row>
+            <div *ngFor="let order of currentUser?.order">
+              <ion-row class="order-card">
+                <ion-col>
+                  <img class="order-img" [src]="getCategoryImage(order.categoryId)" />
+                </ion-col>
+                <ion-col>
+                  <ion-row *ngIf="isUser!='true'" class="m-2" style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.user.id+'/true/false'])">
+                    <mat-icon>person</mat-icon> {{order.user.name}}
+                  </ion-row>
+                  <ion-row *ngIf="isUser=='true'" class="m-2" style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.technician.id+'/false/false'])">
+                    <mat-icon>person</mat-icon> {{order.technician.firstName +" "+ order.technician.lastName}}
+                  </ion-row>
+                  <ion-row class="m-2">
+                    <mat-icon>apps</mat-icon> {{getCategoryName(order.categoryId)}}
+                  </ion-row>
+                  <ion-row *ngIf="order.orderStatus==1" class="m-2">
+                    <mat-icon>help_outline</mat-icon> بإنتظار القبول
+                  </ion-row>
+                  <ion-row *ngIf="order.orderStatus==2" class="m-2">
+                      <mat-icon>help_outline</mat-icon> مقبول
+                    </ion-row>
+                    <ion-row *ngIf="order.orderStatus==3" class="m-2">
+                        <mat-icon>help_outline</mat-icon> مرفوض
+                      </ion-row>
+
+                  
+                  <ion-row>
+                    <button (click)="router.navigate(['/order-details/'+order.id])" mat-raised-button color="primary">
+                      <mat-icon>remove_red_eye</mat-icon> مشاهدة التفاصيل
+                    </button>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+              <hr />
+              <ion-row>
+                <ion-col>
+                </ion-col>
+                <ion-col>
+
+                </ion-col>
+                <ion-col>
+                </ion-col>
+              </ion-row>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -92,62 +116,5 @@
   </div>
   <ion-row style="height: 50%;background-color: black;"></ion-row>
   <ion-row style="height: 50%;"></ion-row>
-  <div class="container">
-    <!-- *ngIf="isLoggedIn() && passedUserId==currentUserId"> -->
-    <!-- owner view -->
-
-  </div>
-  <div class="container">
-    <!-- *ngIf="isLoggedIn() && passedUserId==currentUserId"> -->
-
-    <!-- not owner view -->
-    <!--  <ion-card  class="avatar-card">
-      <ion-row class="avatar-img">
-        <ion-col></ion-col>
-        <ion-col>
-          <img class="avatar-img-content" src="../../assets/icon/favicon.png" />
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-      <ion-row class="mt-5 pt-3">
-        <ion-col size="2"></ion-col>
-        <ion-col>
-          <a class="m-2" href="tel:9349843">
-            <button mat-raised-button color="primary">
-              <ion-icon name="call"></ion-icon> اتصال
-            </button>
-          </a>
-          <button class="m-2" mat-raised-button color="primary">
-            <ion-icon name="star-half"></ion-icon> تقييم
-          </button>
-        </ion-col>
-        <ion-col size="2"></ion-col>
-      </ion-row>
-      <ion-row class="mt-1">
-        <ion-col size="2"></ion-col>
-        <ion-col>
-          <ion-row>
-            <ion-col class="m-2">
-              <ion-row>4.5</ion-row>
-              <ion-row>التقييم</ion-row>
-            </ion-col>
-            <ion-col class="m-2">
-              <ion-row>26</ion-row>
-              <ion-row>طلب</ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="2"></ion-col>
-      </ion-row>
-      <ion-row class="mt-1">
-        <ion-col></ion-col>
-        <ion-col>
-          <h4>محمد علي</h4>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-    </ion-card> -->
-
-  </div>
-
+ 
 </ion-content>

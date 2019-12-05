@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SystemServicesService } from '../services/system-services.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-new-order',
@@ -13,20 +14,23 @@ export class NewOrderPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private systemService: SystemServicesService,
+    private auth: AuthServiceService,
     private orderService: OrderService) { }
 
 
   ngOnInit() {
     this.fetchCategoryId();
     this.getTechniciansByCategoryType();
+    this.userId=this.auth.getLoggedInUserId();
+    console.log(this.userId)
   }
   mainCategoryId: number;
   subCategories;
   userId: number;
   technicians;
   orderImage;
-  isFirstStep:boolean=true;
-  isSecondStep:boolean=false;
+  isFirstStep: boolean = true;
+  isSecondStep: boolean = false;
   public isLoading = true;
   imageProcessing: boolean = false;
   orderForm = new FormGroup({
@@ -81,15 +85,16 @@ export class NewOrderPage implements OnInit {
   }
   createOrder() {
     let newOrder = {
-      categoryId: this.mainCategoryId,
+      categoryId:Number(this.mainCategoryId),
       subCategoryId: this.subCategoryId.value,
-      unitType: this.unitType.value,
+      unitType:Number( this.unitType.value),
       details: this.details.value,
       location: this.location.value,
       technicianId: this.technicianId.value,
-      userId: this.userId
+      userId: this.userId,
+      image:""
     }
-
+console.log(newOrder)
     this.orderService.createOrder(newOrder).subscribe(res => {
       this.uploadOrderImage(res.id);
     })

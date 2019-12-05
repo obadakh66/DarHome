@@ -37,12 +37,12 @@ export class ProfilePage implements OnInit {
     this.route.params.subscribe(param => {
       this.passedUserId = param.id;
       this.isOwner = param.isOwner;
-      this.isUser=param.isUser;
-      console.log(this.isUser)
-      if (this.isUser=='true') {
+      this.isUser = param.isUser;
+      console.log(this.isOwner, this.isUser)
+      if (this.isUser == 'true') {
         this.getUserById();
       }
-      if (this.isUser=='false') {
+      if (this.isUser == 'false') {
         this.getTechnicianById();
       }
     })
@@ -67,19 +67,36 @@ export class ProfilePage implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
 
     });
   }
   allCategories: Category = new Category();
 
   getCategoryName(id) {
-    let category = this.allCategories.categories.find(x => x.id == id);
-    return category.name;
+    if (id) {
+      let category = this.allCategories.categories.find(x => x.id == id);
+      return category.name;
+    }
+    return ''
+
   }
   getCategoryImage(id) {
     let category = this.allCategories.categories.find(x => x.id == id);
     return category.imageUrl;
+  }
+  createRate(rateValue) {
+    let newRate = {
+      rateValue: rateValue,
+      ratedUserId: this.currentUser.id,
+      userId: this.authService.getLoggedInUserId()
+    }
+    console.log(newRate)
+
+    this.userService.createRate(newRate).subscribe(response=>{
+
+    })
+
   }
 
 }  
