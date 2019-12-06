@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { UserService } from '../services/user.service';
 import { ToastController, NavController } from '@ionic/angular';
 import { SystemServicesService } from '../services/system-services.service';
-import { TranslationService } from '../services/tranlation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../home/categories';
 

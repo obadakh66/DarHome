@@ -11,9 +11,9 @@
           </mat-toolbar>
       </ion-header>
       <ion-content>
-        <ion-list dir="rtl">
-          <ion-menu-toggle  auto-hide="false" *ngFor="let p of appPages">
-            <ion-item *ngIf="p.url!='/profile'"  [routerDirection]="'root'" [routerLink]="[p.url]">
+        <ion-list *ngIf="this.authService.isLoggedin()" dir="rtl">
+          <ion-menu-toggle  auto-hide="false" *ngFor="let p of appLoggedPages">
+            <ion-item *ngIf="p.url!='/profile' && p.url!='/tech-orders' && p.url!='/logout'"  [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
@@ -25,8 +25,30 @@
                 {{p.title}}
               </ion-label>
             </ion-item>
-          </ion-menu-toggle>
+            <ion-item *ngIf="p.url=='/tech-orders' && !isUser" [routerDirection]="'root'" [routerLink]="['/tech-orders/'+currentUserId+'/'+isUser+'/'+true]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+            <ion-item *ngIf="p.url=='/logout'" [routerDirection]="'root'" (click)="logout()">
+              <ion-icon slot="start" name="exit"></ion-icon>
+              <ion-label>
+                  {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>         
         </ion-list>
+        <ion-list *ngIf="!this.authService.isLoggedin()" dir="rtl">          
+            <ion-menu-toggle  auto-hide="false" *ngFor="let p of appNotLoggedPages">
+                <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                  <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                  <ion-label>
+                    {{p.title}}
+                  </ion-label>
+                </ion-item>            
+              </ion-menu-toggle>
+          </ion-list>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

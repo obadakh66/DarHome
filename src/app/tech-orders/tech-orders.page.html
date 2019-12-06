@@ -1,0 +1,118 @@
+<ion-header color="primary">
+  <mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+      <ion-buttons slot="start">
+        <ion-menu-button style="color: cornsilk;"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        طلباتي
+
+      </ion-title>
+    </mat-toolbar-row>
+
+
+  </mat-toolbar>
+</ion-header>
+
+<ion-content>
+  <mat-tab-group mat-stretch-tabs [selectedIndex]="0"> 
+    <mat-tab label="المعلق">
+      <ion-card *ngFor="let order of pendingOrders" class="p-4">
+        <br/>
+          <ion-row>
+              <ion-col style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.userId+'/true/false'])">
+                <ion-row>
+                  <mat-icon>person</mat-icon> <b class="mr-2"> {{order.user.name}}</b> <i></i>
+                </ion-row>
+              </ion-col>
+              <ion-col>
+                  <ion-row>
+                    <mat-icon>my_location</mat-icon> <b class="mr-2"> {{order?.location}}</b> <i></i>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+        <hr/>
+        <ion-row>
+          <ion-col class="m-1">
+            <button (click)="acceptOrder(order.id)" style="width: 100px" mat-raised-button color="primary">
+              <mat-icon>check_circle</mat-icon> قبول
+            </button>
+          </ion-col>
+          <ion-col class="m-1">
+            <button (click)="rejectOrder(order.id)" style="width: 100px" mat-raised-button color="primary">
+              <mat-icon>highlight_off</mat-icon> رفض
+            </button>
+          </ion-col>
+          <ion-col class="m-1 watching-icon">
+              <a (click)="router.navigate(['/order-details/'+order.id])" color="primary">
+                <mat-icon style="margin-right: 5px;margin-top: 5px;">remove_red_eye</mat-icon>
+              </a>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="order?.orderStatus!=1">
+          <ion-col class="m-3">
+            <button disabled *ngIf="order?.orderStatus==2" style="width: 100px" mat-raised-button color="primary">
+              مقبول
+            </button>
+            <button disabled *ngIf="order?.orderStatus==3" style="width: 100px" mat-raised-button color="primary">
+              مرفوض
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+    </mat-tab>
+    <mat-tab label="المقبول">
+        <ion-card *ngFor="let order of acceptedOrders" class="p-4">
+            <br/>
+              <ion-row>
+                  <ion-col style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.userId+'/true/false'])">
+                    <ion-row>
+                      <mat-icon>person</mat-icon> <b class="mr-2"> {{order.user.name}}</b> <i></i>
+                    </ion-row>
+                  </ion-col>
+                  <ion-col>
+                      <ion-row>
+                        <mat-icon>my_location</mat-icon> <b class="mr-2"> {{order?.location}}</b> <i></i>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+            <ion-row>
+              <ion-col class="m-1 watching-icon">
+                  <a (click)="router.navigate(['/order-details/'+order.id])" color="primary">
+                    <mat-icon style="margin-right: 5px;margin-top: 5px;">remove_red_eye</mat-icon>
+                  </a>
+                </ion-col>
+            </ion-row>
+          
+          </ion-card>
+    </mat-tab>
+    <mat-tab label="المرفوض">
+        <ion-card *ngFor="let order of rejectedOrders" class="p-4">
+            <br/>
+              <ion-row>
+                  <ion-col style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.userId+'/true/false'])">
+                    <ion-row>
+                      <mat-icon>person</mat-icon> <b class="mr-2"> {{order.user.name}}</b> <i></i>
+                    </ion-row>
+                  </ion-col>
+                  <ion-col>
+                      <ion-row>
+                        <mat-icon>my_location</mat-icon> <b class="mr-2"> {{order?.location}}</b> <i></i>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+            <ion-row>
+              <ion-col class="m-1 watching-icon">
+                  <a (click)="router.navigate(['/order-details/'+order.id])" color="primary">
+                    <mat-icon style="margin-right: 5px;margin-top: 5px;">remove_red_eye</mat-icon>
+                  </a>
+                </ion-col>
+            </ion-row>
+          
+          </ion-card>
+    </mat-tab>
+  </mat-tab-group>
+
+</ion-content>

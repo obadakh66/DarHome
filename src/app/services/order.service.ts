@@ -40,5 +40,8 @@ export class OrderService {
     rejectOrder(id){
         return this.httpClient.get<any>(baseUrl + 'Orders/RejectOrder/' + id);
     }
-
+    getOrdersForTechnician(id){
+        return this.httpClient.get<any>(baseUrl + 'Orders/GetOrderForTechnician/' + id);
+    }
+ 
 }
