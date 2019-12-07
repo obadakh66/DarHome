@@ -41,13 +41,11 @@
                 </h5>
               </div>
               <div *ngIf="isUser=='true' && isOwner=='true'" class="user-meta has-text-centered">
-                <h3 class="username">{{currentUser?.name}}</h3>
+                <h3 class="username">{{currentUser?.name}}</h3>                
               </div>
               <div *ngIf="isUser=='true' && isOwner!='true'" class="user-meta has-text-centered">
                 <h3 class="username">{{currentUser?.name}}</h3>
-                <h5 class="position">
-                  <mat-icon class="mr-2">star</mat-icon> 4.5
-                </h5>
+               
               </div>
               <div *ngIf="isOwner!='true'" class="action has-text-centered">
                 <ion-row>
@@ -78,7 +76,7 @@
                   </ion-row>
                   <ion-row *ngIf="isUser=='true'" class="m-2" style="color: cornflowerblue;" (click)="router.navigate(['/profile/'+order.technician.id+'/false/false'])">
                     <mat-icon>person</mat-icon> {{order.technician.firstName +" "+ order.technician.lastName}}
-                  </ion-row>
+                  </ion-row> 
                   <ion-row class="m-2">
                     <mat-icon>apps</mat-icon> {{getCategoryName(order.categoryId)}}
                   </ion-row>
@@ -91,8 +89,6 @@
                     <ion-row *ngIf="order.orderStatus==3" class="m-2">
                         <mat-icon>help_outline</mat-icon> مرفوض
                       </ion-row>
-
-                  
                   <ion-row>
                     <button (click)="router.navigate(['/order-details/'+order.id])" mat-raised-button color="primary">
                       <mat-icon>remove_red_eye</mat-icon> مشاهدة التفاصيل

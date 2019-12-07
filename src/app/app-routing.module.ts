@@ -32,9 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
   },
   { path: 'new-order/:categoryId', loadChildren: './new-order/new-order.module#NewOrderPageModule' },
-  { path: 'order-details/:orderId', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' }
+  { path: 'order-details/:orderId', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
+  { path: 'tech-orders/:techId', loadChildren: './tech-orders/tech-orders.module#TechOrdersPageModule' }
 
 
+ 
 ];
 
 @NgModule({

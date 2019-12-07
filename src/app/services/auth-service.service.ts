@@ -10,36 +10,41 @@ export class AuthServiceService {
 
   constructor(private jwtService: JwtHelperService, private router: Router) { }
   getLoggedInUserId() {
-  if(this.isLoggedin()){
-    let userId=JSON.parse(localStorage.getItem("currentUser")).id;
-    return userId;
-  }
-  return 0;
+    if (this.isLoggedin()) {
+      let userId = JSON.parse(localStorage.getItem("currentUser")).id;
+      return userId;
+    }
+    return 0;
   }
 
-  
+
 
   async checkLogin() {
-   let currentUSer=localStorage.getItem("currentUser");
-    if(currentUSer){
-      this.router.navigate(["/home"]);
-    return true;
+    let currentUSer = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUSer) {
+      if (currentUSer.firstName) {
+        this.router.navigate(["/tech-orders/" + currentUSer.id]);
+      }
+      else {
+        this.router.navigate(["/home"]);
+      }
+      return true;
     }
-   else{
-    this.router.navigate(["/login"]);
-     console.log(false)
-   return false;
-   }
+    else {
+      this.router.navigate(["/login"]);
+      console.log(false)
+      return false;
+    }
   }
-  async isLoggedin() {
-    let currentUSer=localStorage.getItem("currentUser");
-     if(currentUSer){
-     return true;
-     }
-    else{
-    return false;
+   isLoggedin() {
+    let currentUSer = localStorage.getItem("currentUser");
+    if (currentUSer!=null) {
+      return true;
     }
-   }
+    else {
+      return false;
+    }
+  }
 
   Logout() {
     //this.storage.remove("jwt");

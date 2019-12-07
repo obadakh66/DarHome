@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationService } from '../services/notification.service';
 import { SystemServicesService } from '../services/system-services.service';
 
 @Component({
@@ -14,7 +13,7 @@ export class OrderDetailsPage implements OnInit {
   constructor(private orderService: OrderService, private route: ActivatedRoute, private notificationService: SystemServicesService) { }
   orderId: number;
   order;
-  mainImgUrl: string = "https://localhost:5001"
+  mainImgUrl: string = "https://darhome.azurewebsites.net"
   ngOnInit() {
     this.fetchOrderId();
   }

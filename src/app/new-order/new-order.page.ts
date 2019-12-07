@@ -83,7 +83,7 @@ export class NewOrderPage implements OnInit {
       console.log(this.technicians)
     })
   }
-  createOrder() {
+  createOrder() {   
     let newOrder = {
       categoryId:Number(this.mainCategoryId),
       subCategoryId: this.subCategoryId.value,

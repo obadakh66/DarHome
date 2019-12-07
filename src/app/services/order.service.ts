@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
 //const baseUrl = 'https://www.letsridein.com/api/Assignment/'
-const baseUrl = 'https://localhost:5001/api/'
+const baseUrl = 'https://darhome.azurewebsites.net/api/'
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -40,5 +40,8 @@ export class OrderService {
     rejectOrder(id){
         return this.httpClient.get<any>(baseUrl + 'Orders/RejectOrder/' + id);
     }
-
+    getOrdersForTechnician(id){
+        return this.httpClient.get<any>(baseUrl + 'Orders/GetOrderForTechnician/' + id);
+    }
+ 
 }
