@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-const baseUrl = 'https://localhost:5001/api/Users/'
+const baseUrl = 'https://darhome.azurewebsites.net/api/Users/'
 
 const getUserRoute = 'GetUser/';
 
@@ -43,7 +43,7 @@ export class UserService {
     return this.httpClient.post(baseUrl + 'SignUpFilesForTechnician/'  ,formData);
   }
   createRate(rate) {
-    return this.httpClient.post("https://localhost:5001/api/Rates/PostRate/",rate);
+    return this.httpClient.post("https://darhome.azurewebsites.net/api/Rates/PostRate/",rate);
   }
   
 }

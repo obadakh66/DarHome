@@ -13,7 +13,7 @@ export class OrderDetailsPage implements OnInit {
   constructor(private orderService: OrderService, private route: ActivatedRoute, private notificationService: SystemServicesService) { }
   orderId: number;
   order;
-  mainImgUrl: string = "https://localhost:5001"
+  mainImgUrl: string = "https://darhome.azurewebsites.net"
   ngOnInit() {
     this.fetchOrderId();
   }
