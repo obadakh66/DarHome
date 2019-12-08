@@ -31,7 +31,7 @@
           <div class="col-md-8">
             <mat-form-field class="col-md-12">
               <mat-label>
-                <mat-icon>person_pin</mat-icon> <b> نوع الوحدة</b> <i></i>
+                <mat-icon>drag_indicator</mat-icon> <b> نوع الوحدة</b> <i></i>
               </mat-label>
               <mat-select placeholder="اختر نوع الوحدة" [formControl]="unitType">
                 <mat-option value="1">
@@ -58,7 +58,7 @@
           <div class="col-md-8">
             <mat-form-field class="col-md-12">
               <mat-label>
-                <mat-icon>person_pin</mat-icon> <b> نوع الخدمة الفرعي</b> <i></i>
+                <mat-icon>drag_indicator</mat-icon> <b> نوع الخدمة الفرعي</b> <i></i>
               </mat-label>
               <mat-select placeholder="اختر نوع الوحدة" [formControl]="subCategoryId">
                 <mat-option *ngFor="let category of subCategories" [value]="category.id">
@@ -76,7 +76,7 @@
           <div class="col-md-8">
             <mat-form-field class="col-md-12">
               <mat-label>
-                <mat-icon>person_pin</mat-icon> <b> التفاصيل</b> <i></i>
+                <mat-icon>line_weight</mat-icon> <b> التفاصيل</b> <i></i>
               </mat-label>
               <input matInput placeholder="تفاصيل الطلب" formControlName="details" type="text">
               <mat-error *ngIf="details.touched && details.invalid">
@@ -90,7 +90,7 @@
           <div class="col-md-8">
             <mat-form-field class="col-md-12">
               <mat-label>
-                <mat-icon>person_pin</mat-icon> <b> العنوان</b> <i></i>
+                <mat-icon>my_location</mat-icon> <b> العنوان</b> <i></i>
               </mat-label>
               <input matInput placeholder="ادخل عنوانك بالكامل" formControlName="location" type="text">
               <mat-error *ngIf="location.touched && location.invalid">

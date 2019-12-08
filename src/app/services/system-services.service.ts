@@ -28,8 +28,9 @@ export class SystemServicesService {
     });
   }
 
-  hideLoader() {
-    this.loadingController.dismiss();
+  async hideLoader() {
+    const modal = await this.loadingController.getTop();
+    modal.dismiss();
   }
   setHeaderValue(value) {
     this.headerValue = value;
