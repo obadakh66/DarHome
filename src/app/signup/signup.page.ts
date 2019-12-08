@@ -152,27 +152,31 @@ export class SignupPage implements OnInit {
     setTimeout(function () { this.certificateProcessing = !this.certificateProcessing; }, 2000);
   }
   CreateNewUser(isUser) {
-    if(this.certificateImage && this.idImg){
     this.isLoading = true;
     var user;
     console.log(this.CategoryType.value)
     console.log(this.Sex.value)
     if (!isUser) {
-      user = {
-        firstName: this.FirstName.value,
-        lastName: this.LastName.value,
-        phoneNumber: this.TechnicianPhoneNumber.value.toString(),
-        password: this.TechnicianPassword.value,
-        categoryType: Number(this.CategoryType.value),
-        experianceYears: this.ExperienceYears.value,
-        sex: this.Sex.value
+      if (this.certificateImage && this.idImg) {
+
+        user = {
+          firstName: this.FirstName.value,
+          lastName: this.LastName.value,
+          phoneNumber: this.TechnicianPhoneNumber.value.toString(),
+          password: this.TechnicianPassword.value,
+          categoryType: Number(this.CategoryType.value),
+          experianceYears: this.ExperienceYears.value,
+          sex: this.Sex.value
+        }
+        this.userService.createTechnician(user).subscribe(response => {
+          this.technicianForm.reset();
+          this.uploadPictures(response.id, this.idImg, this.certificateImage)
+        });
+
+
       }
-      this.userService.createTechnician(user).subscribe(response => {
-        this.technicianForm.reset();
-        this.uploadPictures(response.id, this.idImg, this.certificateImage)
-      });
-
-
+    } else {
+      this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
     }
     if (isUser) {
       user = {
@@ -194,10 +198,8 @@ export class SignupPage implements OnInit {
         this.systemService.showMessage("حصل خطأ", errormsg, 'danger')
       });
     }
-  }
-  else{
-    this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
-  }
+
+
 
   }
   uploadPictures(id, file1, file2) {

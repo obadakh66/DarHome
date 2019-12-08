@@ -13,7 +13,7 @@
       <ion-content>
         <ion-list *ngIf="this.authService.isLoggedin()" dir="rtl">
           <ion-menu-toggle  auto-hide="false" *ngFor="let p of appLoggedPages">
-            <ion-item *ngIf="p.url!='/profile' && p.url!='/tech-orders' && p.url!='/logout'"  [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item *ngIf="p.url!='/profile' && p.url!='/tech-orders' && p.url!='/logout' && isUser"  [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
@@ -25,7 +25,7 @@
                 {{p.title}}
               </ion-label>
             </ion-item>
-            <ion-item *ngIf="p.url=='/tech-orders' && !isUser" [routerDirection]="'root'" [routerLink]="['/tech-orders/'+currentUserId+'/'+isUser+'/'+true]">
+            <ion-item *ngIf="p.url=='/tech-orders' && !isUser" [routerDirection]="'root'" [routerLink]="['/tech-orders/'+currentUserId]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}

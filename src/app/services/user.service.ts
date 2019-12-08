@@ -30,7 +30,7 @@ export class UserService {
   }
   
   login(user) {
-    return this.httpClient.get(baseUrl + "Login/"+user.phoneNumber+"/"+user.password)
+    return this.httpClient.get<any>(baseUrl + "Login/"+user.phoneNumber+"/"+user.password)
   }
   saveTechnicianCredntials(id,file1, file2)
   {

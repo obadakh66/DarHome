@@ -19,10 +19,10 @@ export class LoginPage implements OnInit {
     public loadingController: LoadingController,
     public alertController: AlertController,
   ) { }
- 
+
   ngOnInit() {
-     this.loginForm.reset();
-    
+    this.loginForm.reset();
+
   }
   loginForm = new FormGroup
     ({
@@ -41,16 +41,22 @@ export class LoginPage implements OnInit {
     this.systemService.showLoader("يرجى الإنتظار");
     this.userService.login(this.loginForm.value).subscribe(response => {
       console.log(response)
-      localStorage.setItem("currentUser",JSON.stringify(response));
-      this.systemService.hideLoader();
-      this.router.navigate(["/home"]);
+      localStorage.setItem("currentUser", JSON.stringify(response));
+      if (response.firstName) {
+        this.systemService.hideLoader();
+        this.router.navigate(["/profile/"+response.id+"/false/true"]);
+      }
+      else {
+        this.systemService.hideLoader();
+        this.router.navigate(["/home"]);
+      }
     }, error => {
       this.systemService.hideLoader();
-      
-      this.systemService.showMessage("حصل خطأ",error.error, 'danger')
+
+      this.systemService.showMessage("حصل خطأ", "اسم المستخدم او كلمة المرور خاطئة", 'danger')
     });
 
-   
+
   }
 
 }
