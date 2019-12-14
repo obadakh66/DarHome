@@ -139,7 +139,9 @@
                 [value]="technician.id">
                 <ion-item style="width: 100%;">
                   <ion-col>
+                    <a [routerLink]="['/profile/'+technician.id+'/'+false+'/'+false]">
                     {{' '+technician?.firstName +' '+technician?.lastName+' '}}
+                    </a>
                   </ion-col>
                   <ion-col>
                     <ion-row>

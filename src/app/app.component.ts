@@ -36,6 +36,11 @@ export class AppComponent implements OnInit {
       title: 'تسجيل الخروج',
       url: '/logout',
       icon: 'exit_to_app'
+    },
+    {
+      title: 'عن DarHome',
+      url: '/about-us',
+      icon: 'info'
     }
   ];
   public appNotLoggedPages = [
@@ -54,7 +59,11 @@ export class AppComponent implements OnInit {
       url: '/login',
       icon: 'lock'
     },
-
+    {
+      title: 'عن DarHome',
+      url: '/about-us',
+      icon: 'info'
+    }
   ];
 
   constructor(
