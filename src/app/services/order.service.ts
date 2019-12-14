@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
-//const baseUrl = 'https://www.letsridein.com/api/Assignment/'
 const baseUrl = 'https://darhome.azurewebsites.net/api/'
 
 const httpOptions = {
