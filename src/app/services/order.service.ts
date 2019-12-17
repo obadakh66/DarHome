@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
-const baseUrl = 'https://localhost:5001/api/'
+const baseUrl = 'https://darhome.azurewebsites.net/api/'
 
 const httpOptions = {
     headers: new HttpHeaders({
