@@ -6,9 +6,10 @@ import * as Bounce from 'bounce.js';
   providedIn: 'root'
 })
 export class SystemServicesService {
-  headerValue;
-  public static isProgressed: boolean;
+
   constructor(public toastController: ToastController, private loadingController: LoadingController) { }
+  public static isProgressed: boolean;
+  headerValue;
   public async showMessage(header, message, color) {
     const toast = await this.toastController.create({
       header: header,
@@ -29,9 +30,9 @@ export class SystemServicesService {
   }
 
   async hideLoader() {
-    const modal = await this.loadingController.getTop();
-    modal.dismiss();
+    await this.loadingController.dismiss();
   }
+
   setHeaderValue(value) {
     this.headerValue = value;
   }
@@ -50,7 +51,7 @@ export class SystemServicesService {
       .scale({
         from: { x: 1, y: 1 },
         to: { x: 0.1, y: 2.3 },
-        easing: "sway",
+        easing: 'sway',
         duration: 800,
         delay: 65,
         stiffness: 2
@@ -58,7 +59,7 @@ export class SystemServicesService {
       .scale({
         from: { x: 1, y: 1 },
         to: { x: 5, y: 1 },
-        easing: "sway",
+        easing: 'sway',
         duration: 300,
         delay: 30,
       })
