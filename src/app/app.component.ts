@@ -44,11 +44,7 @@ export class AppComponent implements OnInit {
     }
   ];
   public appNotLoggedPages = [
-    {
-      title: 'الصفحة الرئيسية',
-      url: '/home',
-      icon: 'home'
-    },
+   
     {
       title: 'التسجيل',
       url: '/signup',
