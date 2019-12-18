@@ -162,7 +162,7 @@ export class SignupPage implements OnInit {
         user = {
           firstName: this.FirstName.value,
           lastName: this.LastName.value,
-          phoneNumber: this.TechnicianPhoneNumber.value.toString(),
+          phoneNumber:'0'+ this.TechnicianPhoneNumber.value.toString(),
           password: this.TechnicianPassword.value,
           categoryType: Number(this.CategoryType.value),
           experianceYears: this.ExperienceYears.value,
@@ -183,8 +183,8 @@ export class SignupPage implements OnInit {
       user = {
         name: this.Name.value,
         password: this.UserPass.value,
-        phoneNumber: this.UserPhoneNumber.value.toString()
-      }
+        phoneNumber:'0'+ this.UserPhoneNumber.value.toString()
+            }
       this.userService.createUser(user).subscribe(response => {
 
 
