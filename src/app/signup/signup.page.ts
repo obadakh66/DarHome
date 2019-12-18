@@ -175,8 +175,9 @@ export class SignupPage implements OnInit {
 
 
       }
-    } else {
-      this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
+      else {
+        this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
+      }
     }
     if (isUser) {
       user = {
