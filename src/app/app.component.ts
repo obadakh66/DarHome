@@ -55,7 +55,12 @@ export class AppComponent implements OnInit {
       icon: 'person-add'
     },
     {
-      title: 'تسجيل الدخول',
+      title: ' تسجيل الدخول كفني',
+      url: '/login',
+      icon: 'lock'
+    },
+    {
+      title: 'تسجيل الدخول كمستخدم',
       url: '/login',
       icon: 'lock'
     },
