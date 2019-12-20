@@ -48,7 +48,8 @@ export class LoginPage implements OnInit {
       }
       else {
         this.systemService.hideLoader();
-        this.router.navigate(["/home"]);
+        location.assign("/home")
+        //this.router.navigate(["/home"]);
       }
     }, error => {
       this.systemService.hideLoader();
