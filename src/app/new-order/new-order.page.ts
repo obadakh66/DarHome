@@ -11,7 +11,7 @@ import { AuthServiceService } from '../services/auth-service.service';
   styleUrls: ['./new-order.page.scss'],
 })
 export class NewOrderPage implements OnInit {
-
+providerNumber;
   constructor(private route: ActivatedRoute,
     private systemService: SystemServicesService,
     private auth: AuthServiceService,
@@ -84,6 +84,10 @@ export class NewOrderPage implements OnInit {
       console.log(this.technicians)
     })
   }
+  setProviderNumber(number){
+    this.providerNumber=number;
+    console.log(this.providerNumber)
+  }
   createOrder() {   
     let newOrder = {
       categoryId:Number(this.mainCategoryId),
@@ -103,7 +107,7 @@ console.log(newOrder)
   uploadOrderImage(id) {
     this.orderService.uploadOrderImage(id, this.orderImage).subscribe(res => {
       this.systemService.showMessage('تم الإرسال', 'تم إرسال طلبك بنجاح', 'success')
-      this.router.navigate(["/home"])
+      this.router.navigate(["/order-success/"+this.providerNumber])
 
     }, error => {
       this.systemService.showMessage('حصل خطأ', 'لم يتم إرسال طلبك بنجاح', 'danger')

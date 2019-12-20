@@ -176,7 +176,7 @@ export class SignupPage implements OnInit {
 
       }
       else {
-        this.systemService.showMessage("حصل خطأ", "جميع الحقول مطلوبة", 'danger')
+        this.systemService.showMessage("حصل خطأ", "صورة الهوية الشخصية وشهادة مزاولة المهنة إجباري", 'danger')
       }
     }
     if (isUser) {

@@ -135,7 +135,7 @@
             <label id="example-radio-group-label">قم باختيار التقني الخاص بك</label>
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
               [formControl]="technicianId">
-              <mat-radio-button class="example-radio-button" *ngFor="let technician of technicians"
+              <mat-radio-button (click)="setProviderNumber(technician.phoneNumber)" class="example-radio-button" *ngFor="let technician of technicians"
                 [value]="technician.id">
                 <ion-item style="width: 100%;">
                   <ion-col>

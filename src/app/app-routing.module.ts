@@ -33,7 +33,9 @@ const routes: Routes = [
   },
   { path: 'new-order/:categoryId', loadChildren: './new-order/new-order.module#NewOrderPageModule' },
   { path: 'order-details/:orderId', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
-  { path: 'tech-orders/:techId', loadChildren: './tech-orders/tech-orders.module#TechOrdersPageModule' },  { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' }
+  { path: 'tech-orders/:techId', loadChildren: './tech-orders/tech-orders.module#TechOrdersPageModule' },
+  { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' },
+  { path: 'order-success/:phoneNumber', loadChildren: './order-success/order-success.module#OrderSuccessPageModule' }
 
 
 
