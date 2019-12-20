@@ -83,7 +83,7 @@
       </div>
     </div>
     <hr />
-    <ion-row *ngIf="order?.orderStatus==1">
+    <ion-row *ngIf="order?.orderStatus==1  && !isUser">
       <ion-col class="m-3">
         <button (click)="acceptOrder(order.id)" style="width: 100px" mat-raised-button color="primary">
           <mat-icon>check_circle</mat-icon> قبول

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../services/order.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SystemServicesService } from '../services/system-services.service';
@@ -15,6 +15,7 @@ export class NewOrderPage implements OnInit {
   constructor(private route: ActivatedRoute,
     private systemService: SystemServicesService,
     private auth: AuthServiceService,
+    private router:Router,
     private orderService: OrderService) { }
 
 
@@ -102,6 +103,7 @@ console.log(newOrder)
   uploadOrderImage(id) {
     this.orderService.uploadOrderImage(id, this.orderImage).subscribe(res => {
       this.systemService.showMessage('تم الإرسال', 'تم إرسال طلبك بنجاح', 'success')
+      this.router.navigate(["/home"])
 
     }, error => {
       this.systemService.showMessage('حصل خطأ', 'لم يتم إرسال طلبك بنجاح', 'danger')

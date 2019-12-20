@@ -43,6 +43,7 @@ export class UserService {
     return this.httpClient.post(baseUrl + 'SignUpFilesForTechnician/'  ,formData);
   }
   createRate(rate) {
+    console.log(rate)
     return this.httpClient.post("https://darhome.azurewebsites.net/api/Rates/PostRate/",rate);
   }
   

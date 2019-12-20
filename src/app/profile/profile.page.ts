@@ -18,7 +18,7 @@ export class ProfilePage implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private userService: UserService,
-    private notificationService:SystemServicesService,
+    private notificationService: SystemServicesService,
     private router: Router) { }
   currentUserId: number;
   passedUserId: number;
@@ -69,7 +69,7 @@ export class ProfilePage implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.createRate(result);
       }
     });
@@ -91,16 +91,14 @@ export class ProfilePage implements OnInit {
   createRate(rateValue) {
     let newRate = {
       rateValue: rateValue,
-      ratedUserId: this.currentUser.id,
+      RetedUserId:Number(this.currentUser.id),
       userId: this.authService.getLoggedInUserId()
     }
-    console.log(newRate)
-
-    this.userService.createRate(newRate).subscribe(response=>{
-      this.notificationService.showMessage('تم بنجاح', 'تم التقييم بنجاح','success');
+    this.userService.createRate(newRate).subscribe(response => {
+      this.notificationService.showMessage('تم بنجاح', 'تم التقييم بنجاح', 'success');
       this.ngOnInit();
     }, error => {
-      this.notificationService.showMessage('حصل خطأ ', 'لم يتم التقييم بنجاح','danger');
+      this.notificationService.showMessage('حصل خطأ ', 'لم يتم التقييم بنجاح', 'danger');
     })
   }
 

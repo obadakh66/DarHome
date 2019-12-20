@@ -10,12 +10,23 @@ import { SystemServicesService } from '../services/system-services.service';
 })
 export class OrderDetailsPage implements OnInit {
 
-  constructor(private orderService: OrderService, private route: ActivatedRoute, private notificationService: SystemServicesService) { }
+  constructor(private orderService: OrderService, 
+    private route: ActivatedRoute, 
+    private notificationService: SystemServicesService) { }
   orderId: number;
   order;
+  isUser:boolean;
   mainImgUrl: string = "https://darhome.azurewebsites.net/"
   ngOnInit() {
     this.fetchOrderId();
+    let user=JSON.parse(localStorage.getItem("currentUser"));
+    if(user.firstName){
+      this.isUser=false;
+    }
+    else{
+      this.isUser=true;
+    }
+    console.log(this.isUser,user)
   }
   fetchOrderId() {
     this.route.params.subscribe(param => {
