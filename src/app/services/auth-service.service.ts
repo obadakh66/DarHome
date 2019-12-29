@@ -15,17 +15,24 @@ export class AuthServiceService {
       return userId;
     }
     return 0;
+  } 
+  getLoggedInUser() {
+    if (this.isLoggedin()) {
+      let userId = JSON.parse(localStorage.getItem("currentUser"));
+      return userId;
+    }
+    return 0;
   }
-
-
-
   async checkLogin() {
     let currentUSer = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUSer) {
       if (currentUSer.firstName) {
         this.router.navigate(["/tech-orders/" + currentUSer.id]);
       }
-      else {
+      else if(currentUSer.isAdmin){
+        this.router.navigate(["/admin"]);
+      }
+      else{
         this.router.navigate(["/home"]);
       }
       return true;

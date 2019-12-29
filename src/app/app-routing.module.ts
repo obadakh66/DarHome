@@ -35,7 +35,11 @@ const routes: Routes = [
   { path: 'order-details/:orderId', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
   { path: 'tech-orders/:techId', loadChildren: './tech-orders/tech-orders.module#TechOrdersPageModule' },
   { path: 'about-us', loadChildren: './about-us/about-us.module#AboutUsPageModule' },
-  { path: 'order-success/:phoneNumber', loadChildren: './order-success/order-success.module#OrderSuccessPageModule' }
+  { path: 'order-success/:phoneNumber', loadChildren: './order-success/order-success.module#OrderSuccessPageModule' },
+  { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
+  { path: 'admin', loadChildren: './admin/admin.module#AdminPageModule' },
+  { path: 'image-view/:techId', loadChildren: './image-view/image-view.module#ImageViewPageModule' }
+
 
 
 

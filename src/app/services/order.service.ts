@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 
-const baseUrl = 'https://darhome.azurewebsites.net/api/'
+const baseUrl = 'https://darhomeapis.azurewebsites.net/api/'
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -22,6 +22,9 @@ export class OrderService {
     createOrder(order) {
         return this.httpClient.post<any>(baseUrl + 'Orders/PostOrder/', order);
     }
+    createNotification(order) {
+        return this.httpClient.post<any>(baseUrl + 'Orders/PostNotification/', order);
+    }
     uploadOrderImage(id, file) {
         const formData: FormData = new FormData();
         formData.append('File', file);
@@ -39,8 +42,11 @@ export class OrderService {
     rejectOrder(id){
         return this.httpClient.get<any>(baseUrl + 'Orders/RejectOrder/' + id);
     }
+    CancelOrder(id){
+        return this.httpClient.get<any>(baseUrl + 'Orders/CancelOrder/' + id);
+    }
     getOrdersForTechnician(id){
         return this.httpClient.get<any>(baseUrl + 'Orders/GetOrderForTechnician/' + id);
     }
- 
+  
 }

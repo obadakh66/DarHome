@@ -1,0 +1,46 @@
+<ion-header color="primary">
+  <mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+      <ion-buttons slot="start">
+        <ion-menu-button style="color: cornsilk;"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        المسؤول
+      </ion-title>
+    </mat-toolbar-row>
+
+
+  </mat-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card *ngFor="let order of requests" class="p-4">
+    <br/>
+      <ion-row>
+          <ion-col style="color: cornflowerblue;">
+            <ion-row>
+              <mat-icon>person</mat-icon> <b class="mr-2"> {{order.firstName + ' '+ order.lastName}}</b> <i></i>
+            </ion-row>
+          </ion-col>
+          <ion-col>
+              <ion-row>
+                <mat-icon>my_location</mat-icon> <b class="mr-2"> {{order?.city}}</b> <i></i>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+    <hr/>
+    <ion-row>
+        <button (click)="acceptRequest(order.id)" style="width: 100px" mat-raised-button color="primary">
+          <mat-icon>check_circle</mat-icon> قبول
+        </button>
+      <ion-col class="m-1 watching-icon">
+          <a (click)="router.navigate(['/image-view/'+order.id])" color="primary">
+            <mat-icon style="margin-right: 5px;margin-top: 5px;">remove_red_eye</mat-icon>
+          </a>
+        </ion-col>
+    </ion-row>
+    
+  </ion-card>
+</ion-content>

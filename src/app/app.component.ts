@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   currentUserId;
   isUser;
+  isAdmin;
   appRenderedPages;
   isLoggedIn: boolean;
   public appLoggedPages = [
@@ -30,6 +31,11 @@ export class AppComponent implements OnInit {
     {
       title: 'طلباتي',
       url: '/tech-orders',
+      icon: 'reorder'
+    },
+    {
+      title: 'الإشعارات',
+      url: '/notifications',
       icon: 'reorder'
     },
     {
@@ -57,6 +63,11 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'تسجيل الدخول كمستخدم',
+      url: '/login',
+      icon: 'lock'
+    },
+    {
+      title: 'تسجيل الدخول كمسؤول',
       url: '/login',
       icon: 'lock'
     },
@@ -90,19 +101,24 @@ export class AppComponent implements OnInit {
 
         this.currentUserId = user.id;
         if (user.firstName) { this.isUser = false }
-        else {
-        this.isUser = true;
+        else if(user.isAdmin) {
+        this.isUser = false;
+        this.isAdmin=true;
         }
-        console.log(user);
+        else{
+          this.isUser=true;
+        }
         this.isLoggedIn = true;
       }
       else {
         this.isLoggedIn = false;
       }
+      console.log(this.isAdmin);
+
     });
   }
   logout() {
     localStorage.clear()
-    this.router.navigate(["/login"])
+    location.assign('/login')
   }
 }

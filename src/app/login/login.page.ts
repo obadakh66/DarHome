@@ -39,22 +39,26 @@ export class LoginPage implements OnInit {
   }
   login() {
     this.systemService.showLoader("يرجى الإنتظار");
+    
     this.userService.login(this.loginForm.value).subscribe(response => {
       console.log(response)
       localStorage.setItem("currentUser", JSON.stringify(response));
       if (response.firstName) {
         this.systemService.hideLoader();
-        this.router.navigate(["/profile/"+response.id+"/false/true"]);
+        location.assign("/profile/"+response.id+"/false/true");
+      }
+      else if(response.isAdmin){
+        this.systemService.hideLoader();
+        location.assign("/admin")
       }
       else {
         this.systemService.hideLoader();
         location.assign("/home")
-        //this.router.navigate(["/home"]);
       }
     }, error => {
       this.systemService.hideLoader();
 
-      this.systemService.showMessage("حصل خطأ", "اسم المستخدم او كلمة المرور خاطئة", 'danger')
+      this.systemService.showMessage("حصل خطأ", error.error, 'danger')
     });
 
 

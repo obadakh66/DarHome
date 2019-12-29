@@ -11,18 +11,20 @@ import { AuthServiceService } from '../services/auth-service.service';
   styleUrls: ['./new-order.page.scss'],
 })
 export class NewOrderPage implements OnInit {
-providerNumber;
+  providerNumber;
+  currentUser;
   constructor(private route: ActivatedRoute,
     private systemService: SystemServicesService,
     private auth: AuthServiceService,
-    private router:Router,
+    private router: Router,
     private orderService: OrderService) { }
 
 
   ngOnInit() {
     this.fetchCategoryId();
     this.getTechniciansByCategoryType();
-    this.userId=this.auth.getLoggedInUserId();
+    this.userId = this.auth.getLoggedInUserId();
+    this.currentUser = this.auth.getLoggedInUser();
     console.log(this.userId)
   }
   mainCategoryId: number;
@@ -80,34 +82,40 @@ providerNumber;
   }
   getTechniciansByCategoryType() {
     this.orderService.getTechniciansByCategoryType(this.mainCategoryId).subscribe(res => {
-      this.technicians = res;
-      console.log(this.technicians)
+      this.technicians = res.filter(x => x.city == this.currentUser.city);
+      console.log(res)
     })
   }
-  setProviderNumber(number){
-    this.providerNumber=number;
+  setProviderNumber(number) {
+    this.providerNumber = number;
     console.log(this.providerNumber)
   }
-  createOrder() {   
+  createOrder() {
     let newOrder = {
-      categoryId:Number(this.mainCategoryId),
+      categoryId: Number(this.mainCategoryId),
       subCategoryId: this.subCategoryId.value,
-      unitType:Number( this.unitType.value),
+      unitType: Number(this.unitType.value),
       details: this.details.value,
       location: this.location.value,
       technicianId: this.technicianId.value,
       userId: this.userId,
-      image:""
+      image: "",
+      SubCategoryName:this.subCategories.find(x=>x.id==this.subCategoryId.value).subCategoryName
     }
-console.log(newOrder)
+    console.log(newOrder)
     this.orderService.createOrder(newOrder).subscribe(res => {
+      console.log(res);
       this.uploadOrderImage(res.id);
+      this.createNotification(res);
     })
+  }
+  createNotification(order) {
+    this.orderService.createNotification(order).subscribe(res => console.log(res));
   }
   uploadOrderImage(id) {
     this.orderService.uploadOrderImage(id, this.orderImage).subscribe(res => {
       this.systemService.showMessage('تم الإرسال', 'تم إرسال طلبك بنجاح', 'success')
-      this.router.navigate(["/order-success/"+this.providerNumber])
+      this.router.navigate(["/home"])
 
     }, error => {
       this.systemService.showMessage('حصل خطأ', 'لم يتم إرسال طلبك بنجاح', 'danger')

@@ -91,7 +91,22 @@
           </mat-form-field>
         </div>
       </div> <br />
-
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12 w-100">
+            <mat-label>
+              <mat-icon>people</mat-icon> <b> المدينة</b>
+            </mat-label>
+            <mat-select placeholder="اختر المدينة" [formControl]="UserCity">
+              <mat-option *ngFor="let city of citites" [value]="city">
+                {{city}}
+              </mat-option>             
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div><br />
       <div class="row">
         <div class="col-md-2">
         </div>
@@ -238,6 +253,22 @@
               <mat-option [value]="false">
                 انثى
               </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div><br />
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+          <mat-form-field class="col-md-12 w-100">
+            <mat-label>
+              <mat-icon>people</mat-icon> <b> المدينة</b>
+            </mat-label>
+            <mat-select placeholder="اختر المدينة" [formControl]="City">
+              <mat-option *ngFor="let city of citites" [value]="city">
+                {{city}}
+              </mat-option>             
             </mat-select>
           </mat-form-field>
         </div>

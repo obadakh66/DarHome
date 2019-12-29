@@ -6,6 +6,7 @@ import { SystemServicesService } from '../services/system-services.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../home/categories';
 
+const cities = ["اربد", "جرش", "عجلون", "المفرق", "السلط", "عمان", "الزرقاء", "مادبا", "الكرك", "الطفيلة", "معان", "العقبة"]
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -27,6 +28,7 @@ export class SignupPage implements OnInit {
   //private user: SocialUser;
   public loginCounter = 0;
   isChild: boolean;
+  citites:any=cities;
   private loggedIn: boolean;
   signupObject: any[] = [];
   allCategories: Category = new Category();
@@ -35,7 +37,7 @@ export class SignupPage implements OnInit {
     UserPass: new FormControl('', [Validators.required, Validators.minLength(8)]),
     UserPhoneNumber: new FormControl('', Validators.required),
     UserRePass: new FormControl('', Validators.required),
-
+    UserCity: new FormControl('')
   }, { validators: this.userPassValidator })
 
   technicianForm = new FormGroup({
@@ -46,7 +48,8 @@ export class SignupPage implements OnInit {
     TechnicianRePassword: new FormControl('', Validators.required),
     ExperienceYears: new FormControl('', Validators.required),
     CategoryType: new FormControl(''),
-    Sex: new FormControl('')
+    Sex: new FormControl(''),
+    City: new FormControl('')
 
   }, { validators: this.technicianPassValidator })
 
@@ -63,6 +66,9 @@ export class SignupPage implements OnInit {
   get UserRePass() {
     return this.userForm.get('UserRePass') as FormControl;
   }
+  get UserCity() {
+    return this.userForm.get('UserCity') as FormControl;
+  }
   get FirstName() {
     return this.technicianForm.get('FirstName') as FormControl;
   }
@@ -71,7 +77,9 @@ export class SignupPage implements OnInit {
   }
   get TechnicianPassword() {
     return this.technicianForm.get('TechnicianPassword') as FormControl;
-
+  }
+  get City() {
+    return this.technicianForm.get('City') as FormControl;
   }
   get TechnicianPhoneNumber() {
     return this.technicianForm.get('TechnicianPhoneNumber') as FormControl;
@@ -142,6 +150,7 @@ export class SignupPage implements OnInit {
   uploadIdentity(str: any) {
     this.identityProcessing = true
     this.idImg = str.target.files[0];
+    console.log(this.idImg)
     setTimeout(function () {
       this.identityProcessing = !this.identityProcessing; console.log(this.identityProcessing)
     }, 2000);
@@ -149,6 +158,8 @@ export class SignupPage implements OnInit {
   uploadCertificate(str: any) {
     this.certificateProcessing = true
     this.certificateImage = str.target.files[0];
+    console.log(this.certificateImage)
+
     setTimeout(function () { this.certificateProcessing = !this.certificateProcessing; }, 2000);
   }
   CreateNewUser(isUser) {
@@ -162,11 +173,12 @@ export class SignupPage implements OnInit {
         user = {
           firstName: this.FirstName.value,
           lastName: this.LastName.value,
-          phoneNumber:'0'+ this.TechnicianPhoneNumber.value.toString(),
+          phoneNumber: '0' + this.TechnicianPhoneNumber.value.toString(),
           password: this.TechnicianPassword.value,
           categoryType: Number(this.CategoryType.value),
           experianceYears: this.ExperienceYears.value,
-          sex: this.Sex.value
+          sex: this.Sex.value,
+          city:this.City.value
         }
         this.userService.createTechnician(user).subscribe(response => {
           this.technicianForm.reset();
@@ -183,8 +195,9 @@ export class SignupPage implements OnInit {
       user = {
         name: this.Name.value,
         password: this.UserPass.value,
-        phoneNumber:'0'+ this.UserPhoneNumber.value.toString()
-            }
+        phoneNumber: '0' + this.UserPhoneNumber.value.toString(),
+        city:this.UserCity.value
+      }
       this.userService.createUser(user).subscribe(response => {
 
 
@@ -205,11 +218,13 @@ export class SignupPage implements OnInit {
   }
   uploadPictures(id, file1, file2) {
     this.userService.saveTechnicianCredntials(id, file1, file2).subscribe(res => {
-      this.systemService.showMessage("تم التسجيل", "تم التسجيل بنجاح", 'success')
+      this.systemService.showMessage("تم التسجيل", " تم التسجيل بنجاح يرجى انتظار المسؤول للموافقة على طلبك", 'success')
       this.isLoading = false;
+      console.log(res);
       this.technicianForm.reset();
       this.route.navigate(["/login"]);
     }, error => {
+      console.log(error);
       var errormsg = error.error;
       this.isLoading = false;
       this.systemService.showMessage("حصل خطأ", errormsg, 'danger')

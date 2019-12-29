@@ -16,7 +16,7 @@ export class OrderDetailsPage implements OnInit {
   orderId: number;
   order;
   isUser:boolean;
-  mainImgUrl: string = "https://darhome.azurewebsites.net/"
+  mainImgUrl: string = "https://darhomeapis.azurewebsites.net/"
   ngOnInit() {
     this.fetchOrderId();
     let user=JSON.parse(localStorage.getItem("currentUser"));
@@ -54,6 +54,14 @@ export class OrderDetailsPage implements OnInit {
       this.getOrderDetails()
     }, error => {
       this.notificationService.showMessage('حصل خطأ ', 'لم يتم رفض الطلب بنجاح','danger');
+    })
+  }
+  cancelOrder() {
+    this.orderService.CancelOrder(this.orderId).subscribe(respnse => {
+      this.notificationService.showMessage('تم بنجاح', 'تم إلغاء الطلب بنجاح','success');
+      this.getOrderDetails()
+    }, error => {
+      this.notificationService.showMessage('حصل خطأ ', 'لم يتم إلغاء الطلب بنجاح','danger');
     })
   }
 
