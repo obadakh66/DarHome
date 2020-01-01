@@ -151,7 +151,7 @@
         </div><br />
         <div class="row p-3">
           <ion-col class="p-3">
-            <button mat-raised-button color="primary" (click)="createOrder()">
+            <button [disabled]="!providerNumber" mat-raised-button color="primary" (click)="createOrder()">
               ارسال
             </button>
           </ion-col>
